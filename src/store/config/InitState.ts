@@ -2,14 +2,14 @@ import { State as AppState } from "./Models";
 const InitState: AppState = {
   application: {
     logo: "",
-    name: "BrainLib",
-    title: "BrainLib",
-    description: "BrainLib",
+    name: "Demo",
+    title: "Demo",
+    description: "CMC Mentor",
     version: "1.0.0.0",
   },
   company: {
-    name: "UC",
-    webUrl: "https://ouc.vn/",
+    name: "CMC",
+    webUrl: "https://cmc.com.vn",
   },
   apps: [{
     name: "home",

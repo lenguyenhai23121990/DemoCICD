@@ -8,10 +8,17 @@ const RoutesMap: any = {
   },
   'home': { path: '/' },
   'login': { path: '/login' },
-  'service1/master': { path: '/service1/master' },
-  'service1/detail': { path: '/service1/detail' },
-  'service2/master': { path: '/service2/master' },
-  'service2/detail': { path: '/service2/detail' },
+  'contenthome/ContentHome': { path: '/Home' },
+  'contentdetail/FromCategoryNews': { path: '/CategoryNews' },
+  'contentdetail/FormCollectionCategory': { path: '/CollectionCategory' },
+  'contentdetail/FormCollectionHome': { path: '/CollectionHome' },
+  'contentdetail/FormDetailBook': { path: '/DetailBook' },
+  'contentdetail/FromDetailNews': { path: '/DetailNews' },
+  'contentdetail/FromSearch': { path: '/Search' },
+  // 'service1/detail': { path: '/service1/detail' },
+  // 'service2/master': { path: '/service2/master' },
+  // 'service2/detail': { path: '/service2/detail' },
+  // 'service2/readers': { path: '/service2/readers' },
 }
 //#endregion
 export default RoutesMap

@@ -144,6 +144,7 @@ const HttpClient = {
     get: async (path: string, cache?: CacheOptions) => {
         try {
             let url = path.startsWith("http") ? path : ENV.API_URL + path;
+            console.log("URl",url);
             if (cache?.enable) {
                 const api = setup({
                     cache: {

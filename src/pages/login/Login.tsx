@@ -104,7 +104,7 @@ const Login = (props: Props) => {
                 </div>
                 <div style={{padding: '10px'}}>
                     <span style={{float:'left'}}><img src="assets/brand/footer-dark.png" style={{ width: 'auto', height: '2.25rem' }} alt="" /></span>
-                    <span style={{float:'right', color:'white'}}>©2023, <b>UC Việt Nam</b>. All rights reserved.</span>
+                    <span style={{float:'right', color:'white'}}>© 1997 - {new Date().getFullYear() + ""} by CMC. All rights reserved.</span>
                 </div>
             </div>
         </React.Fragment>

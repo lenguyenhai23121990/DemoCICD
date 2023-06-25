@@ -8,10 +8,19 @@ const screens: any = {
   "signin-oidc": "signin-oidc",
   "home": ENV.HOME_PATH,
   "login": 'login/Login',
-  "service1/master": "service1/master/List",
-  "service1/detail": "service1/detail/List",
-  "service2/master": "service2/master/List",
-  "service2/detail": "service2/detail/List",
+  "contenthome/ContentHome": "contenthome/ContentHome",
+  "contentdetail/FromCategoryNews": "contentdetail/FromCategoryNews",
+  "contentdetail/FormCollectionCategory": "contentdetail/FormCollectionCategory",
+  "contentdetail/FormCollectionHome": "contentdetail/FormCollectionHome",
+  "contentdetail/FormDetailBook": "contentdetail/FormDetailBook",
+  "contentdetail/FromDetailNews": "contentdetail/FromDetailNews",
+  "contentdetail/FromSearch": "contentdetail/FromSearch",
+  
+  // "service1/master": "service1/master/List",
+  // "service1/detail": "service1/detail/List",
+  // "service2/master": "service2/master/List",
+  // "service2/detail": "service2/detail/List",
+  // "service2/readers": "service2/readers/List",
 };
 
 // NOTES: this is the primary reducer demonstrating how RFR replaces the need

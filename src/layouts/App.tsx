@@ -1,7 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { classNames } from 'primereact/utils';
 // import { Route, Routes, useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo_header from './../Image_CSS/logo_header.png';
+import mdi_phone from './../Image_CSS/mdi_phone.png';
+import './../Image_CSS/newLayOutcms.css'
+import './../Image_CSS/stylesheet.scss'
+import './../Image_CSS/all.css'
+import './../Image_CSS/font-awesome.min.css'
+import Carousel from 'react-bootstrap/Carousel';
+//------------Home------------------------
+import BannerHeader from '../components/Home/BannerHeader'
+import BookNewHome from '../components/Home/BookNewHome'
+import CollectionHome from '../components/Home/CollectionHome'
+import FooterHome from '../components/Home/FooterHome'
+import ImageVideoHome from '../components/Home/ImageVideoHome'
+import InfomationHome from '../components/Home/InfomationHome'
+import LinkFooterHome from '../components/Home/LinkFooterHome'
+import MenuTop from '../components/Home/MenuTop'
+import NewsHome from '../components/Home/NewsHome'
+import NewsPaperHome from '../components/Home/NewsPaperHome'
+import TopHeader from '../components/Home/TopHeader'
+import FormSearch from '../components/Search/FromSearch'
+//------------End Home------------------------
+import '../Image_CSS/roboto-regular-webfont.ttf'
 
+import Button from 'react-bootstrap/Button';
 import AppTopbar from './AppTopbar';
 // import AppBreadcrumb from './AppBreadcrumb';
 import AppInlineMenu from './AppInlineMenu';
@@ -16,7 +40,7 @@ import AppRightMenu from './AppRightMenu';
 // import Invoice from './pages/Invoice';
 // import Help from './pages/Help';
 // import TimelineDemo from './pages/TimelineDemo';
-
+import 'typeface-roboto';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -34,6 +58,7 @@ import { connect } from "react-redux";
 import { ApplicationState } from 'store';
 import Content, { Login } from 'pages';
 import { getUser } from 'utils';
+import { Col, Container, Row } from 'react-bootstrap';
 
 
 export const RTLContext = React.createContext(false);
@@ -48,8 +73,8 @@ type Props = State
 const App = (props: Props) => {
     // console.log('App')
     const { isExpired } = useJwt(props.user.AccessToken?.replace(/-/g, "+").replace(/_/g, "/"));
-    const [menuMode, ] = useState('static');
-    const [inlineMenuPosition, ] = useState('bottom');
+    const [menuMode,] = useState('static');
+    const [inlineMenuPosition,] = useState('bottom');
     const [desktopMenuActive, setDesktopMenuActive] = useState(true);
     const [mobileMenuActive, setMobileMenuActive] = useState(false);
     const [activeTopbarItem, setActiveTopbarItem] = useState(null);
@@ -57,8 +82,8 @@ const App = (props: Props) => {
     const [rightMenuActive, setRightMenuActive] = useState(false);
     const [menuActive, setMenuActive] = useState(false);
     const [inputStyle, setInputStyle] = useState('filled');
-    const [isRTL, ] = useState<boolean>(false);
-    const [ripple, ] = useState(true);
+    const [isRTL,] = useState<boolean>(false);
+    const [ripple,] = useState(true);
     const [mobileTopbarActive, setMobileTopbarActive] = useState(false);
     const [menuTheme, setMenuTheme] = useState('light');
     const [topbarTheme, setTopbarTheme] = useState('blue');
@@ -77,14 +102,21 @@ const App = (props: Props) => {
     let topbarItemClick: boolean;
     let menuClick: boolean;
     let inlineMenuClick: boolean;
-
+    // useEffect(() => {
+    //     WebFont.load({
+    //         google: {
+    //             families: ['Droid Sans', 'Roboto', Chilanka']
+    //         }
+    //     })
+    // }, [])
     const menu = [
         {
             label: 'Service 1',
             icon: 'pi pi-fw pi-home',
             items: [
-                { label: 'Master', icon: 'pi pi-fw pi-home', to: '/service1/master',  },
-                { label: 'Detail', icon: 'pi pi-fw pi-home', to: '/service1/detail',  },
+                { label: 'Master', icon: 'pi pi-fw pi-home', to: '/service1/master', },
+                { label: 'Detail', icon: 'pi pi-fw pi-home', to: '/service1/detail', },
+
             ]
         },
         {
@@ -93,6 +125,8 @@ const App = (props: Props) => {
             items: [
                 { label: 'Master', icon: 'pi pi-fw pi-bars', to: '/service2/master' },
                 { label: 'Detail', icon: 'pi pi-fw pi-comment', to: '/service2/detail' },
+                { label: 'Readers', icon: 'pi pi-fw pi-user', to: '/service2/readers', },
+
             ]
         }
     ];
@@ -156,7 +190,7 @@ const App = (props: Props) => {
 
     useEffect(() => {
         const appLogoLink = document.getElementById('app-logo') as HTMLInputElement;
-        if(appLogoLink){
+        if (appLogoLink) {
             if (topbarTheme === 'white' || topbarTheme === 'yellow' || topbarTheme === 'amber' || topbarTheme === 'orange' || topbarTheme === 'lime') {
                 appLogoLink.src = 'assets/brand/logo-dark.png';
             } else {
@@ -258,6 +292,7 @@ const App = (props: Props) => {
 
     const onMenuClick = (event: any) => {
         menuClick = true;
+
     };
 
     const onMenuButtonClick = (event: Event) => {
@@ -388,84 +423,59 @@ const App = (props: Props) => {
     return (
         // props.isAuthenticated && !isExpired?
         (<RTLContext.Provider value={isRTL}>
-            <div className={layoutContainerClassName} onClick={onDocumentClick}>
-                <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
-
-                <AppTopbar
-                    horizontal={isHorizontal()}
-                    activeTopbarItem={activeTopbarItem}
-                    onMenuButtonClick={onMenuButtonClick}
-                    onTopbarItemClick={onTopbarItemClick}
-                    onRightMenuButtonClick={onRightMenuButtonClick}
-                    onMobileTopbarButtonClick={onMobileTopbarButtonClick}
-                    mobileTopbarActive={mobileTopbarActive}
-                    searchActive={searchActive}
-                    onSearch={onSearch}
-                />
-
-                <div className="menu-wrapper" onClick={onMenuClick}>
-                    <div className="layout-menu-container">
-                        {(inlineMenuPosition === 'top' || inlineMenuPosition === 'both') && <AppInlineMenu menuKey="top" inlineMenuActive={inlineMenuActive} onInlineMenuClick={onInlineMenuClick} horizontal={isHorizontal()} menuMode={menuMode} />}
-                        <AppMenu model={menu} onMenuItemClick={onMenuItemClick} onRootMenuItemClick={onRootMenuItemClick} menuMode={menuMode} active={menuActive} />
-                        {/* {(inlineMenuPosition === 'bottom' || inlineMenuPosition === 'both') && (
-                            <AppInlineMenu menuKey="bottom" inlineMenuActive={inlineMenuActive} onInlineMenuClick={onInlineMenuClick} horizontal={isHorizontal()} menuMode={menuMode} />
-                        )} */}
+            {/* <section className='LogoTop'>
+                    <div className="col-md-3 col-12 ">        
+                        <img id="imgTopHeader" src="https://cosodulieu.evn.com.vn/pages/cms/img/logo_header.png"/> 
                     </div>
-                </div>
-
-                <div className="layout-main">
-                    {/* <AppBreadcrumb routes={routes} /> */}
-
-                    <div className="layout-content">
-                        {/* <Routes>
-                            <Route path="/pages/crud" element={<Crud />} />
-                            <Route path="/pages/calendar" element={<Calendar />} />
-                            <Route path="/pages/help" element={<Help />} />
-                            <Route path="/pages/invoice" element={<Invoice />} />
-                            <Route path="/pages/empty" element={<EmptyPage />} />
-                            <Route path="/pages/timeline" element={<TimelineDemo />} />
-                        </Routes> */}
-                        <Content />
+                    <div className="col-md-8 col-12 divIconLeft">        
                     </div>
+            </section> */}
+            {/* 
+                <Row>
+                    <Col>1 of 1</Col>
+                </Row>
+            </Container> */}
 
-                    <AppFooter colorMode={colorMode} />
-                </div>
 
-                {/* <AppConfig
-                    inputStyle={inputStyle}
-                    onInputStyleChange={onInputStyleChange}
-                    rippleEffect={ripple}
-                    onRippleEffect={onRipple}
-                    menuMode={menuMode}
-                    onMenuModeChange={onMenuModeChange}
-                    inlineMenuPosition={inlineMenuPosition}
-                    onInlineMenuPositionChange={onInlineMenuPositionChange}
-                    colorMode={colorMode}
-                    onColorModeChange={onColorModeChange}
-                    menuTheme={menuTheme}
-                    onMenuThemeChange={onMenuThemeChange}
-                    topbarTheme={topbarTheme}
-                    onTopbarThemeChange={onTopbarThemeChange}
-                    theme={theme}
-                    onThemeChange={onThemeChange}
-                    isRTL={isRTL}
-                    onRTLChange={onRTLChange}
-                /> */}
 
-                <AppRightMenu rightMenuActive={rightMenuActive} onRightMenuButtonClick={onRightMenuButtonClick} />
 
-                {mobileMenuActive && <div className="layout-mask modal-in"></div>}
-            </div>
+            {/* Trang home */}
+            
+            <TopHeader></TopHeader>
+            <MenuTop></MenuTop>
+          
+             <Content />
+             
+            <LinkFooterHome></LinkFooterHome>
+            <FooterHome ></FooterHome>
+           
+           
+             
+            
+             
+             
+             
+            
+             
+
+
+
+            
+
+            
+            
+
+            
+
         </RTLContext.Provider>)
-        // : 
-        // (<Login />)
+
     );
 };
 
 const mapStateToProps = (state: ApplicationState) => {
     return {
         user: getUser(),
-        isAuthenticated: getUser().AccessToken !== null
+        isAuthenticated: getUser().AccessToken !== undefined,
     }
 }
 const mapDispatchToProps = {

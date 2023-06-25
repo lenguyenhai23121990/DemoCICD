@@ -9,7 +9,7 @@ const InitState: AppState = {
         avatar: "",
         code: "nccong",
         name: "Nguyễn Chí Công",
-        email: "rollover79@gmail.com",
+        email: "nccong@cmc.com.vn",
         roleId: 1,
         khoaId: 36,
         roles: [
@@ -22,7 +22,17 @@ const InitState: AppState = {
                 departmentCode: "SYSTEM",
                 departmentName: "System managers",
                 isDefault: true
-            }
+            },
+            {
+                id: 2,
+                roleId: 2,
+                roleCode: "DEV",
+                roleName: "Developer",
+                departmentId: 2,
+                departmentCode: "PDC",
+                departmentName: "Phát triển sản phẩm",
+                isDefault: false
+            },
         ]
     },
 }
