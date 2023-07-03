@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { classNames } from 'primereact/utils';
 // import { Route, Routes, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo_header from './../Image_CSS/logo_header.png';
-import mdi_phone from './../Image_CSS/mdi_phone.png';
-import './../Image_CSS/newLayOutcms.css'
-import './../Image_CSS/stylesheet.scss'
-import './../Image_CSS/all.css'
-import './../Image_CSS/font-awesome.min.css'
+import logo_header from '../assets/Image/logo_header.png';
+import mdi_phone from '../assets/Image/mdi_phone.png';
+import '../assets/CSS/newLayOutcms.css'
+import '../assets/CSS/stylesheet.scss'
+import '../assets/CSS/all.css'
+import '../assets/CSS/font-awesome.min.css'
 import Carousel from 'react-bootstrap/Carousel';
 //------------Home------------------------
 import BannerHeader from '../components/Home/BannerHeader'
@@ -23,7 +23,7 @@ import NewsPaperHome from '../components/Home/NewsPaperHome'
 import TopHeader from '../components/Home/TopHeader'
 import FormSearch from '../components/Search/FromSearch'
 //------------End Home------------------------
-import '../Image_CSS/roboto-regular-webfont.ttf'
+import '../assets/CSS/roboto-regular-webfont.ttf'
 
 import Button from 'react-bootstrap/Button';
 import AppTopbar from './AppTopbar';

@@ -1,12 +1,23 @@
-import React from "react"
-
-
+import React,{useRef, useState } from "react";
+import SearchService from '../../services/SearchService';
 interface State {
 
 }
-type Props = State
-const BannerDetail = (props: Props) => {
+type Props = {
+  Keyword?:string;
+  CategoryBib?:string;
+  MethodParent?:any;
+}
 
+const BannerDetail = (props: Props) => {
+  const [ResultSearch, setResultSearch] = useState();
+  const [KeywordGet, setKeywordGet] = React.useState(props.Keyword);
+  const [CategoryBibGet, setCategoryBibGet] = React.useState(props.CategoryBib);
+  const inputRef = useRef(null);
+  const ClientSearchNews=()=>
+  {
+    props.MethodParent(KeywordGet, CategoryBibGet);
+  }
     return (
         <section>
          <div>
@@ -15,10 +26,10 @@ const BannerDetail = (props: Props) => {
           <div className="row col-md-12" id="searchBannerSubPage">  
             <div className="container"> 
               <div className="row">
-                <input type="text" id="txtKeyword" 
+                <input type="text" id="txtKeyword" onChange={e => setKeywordGet(e.target.value)} 
                 //  onkeydown="javascript:if (event.keyCode == 13) {ClientSearchNews();}"
                   className="form-control span12" placeholder="Từ khóa...." />  
-                <select className="form-control" id="cboCateChild"> 
+                <select className="form-control" id="cboCateChild"  onChange={e => {setCategoryBibGet( e.target.value)}} > 
                   <option value="">CHỌN TIÊU CHÍ TÌM KIẾM</option> 
                   <option value="title">Nhan đề</option> 
                   <option value="author">Tác giả</option> 
@@ -26,7 +37,7 @@ const BannerDetail = (props: Props) => {
                   <option value="keyword">Từ khóa</option> 
                   <option value="yearpub">Năm xuất bản</option> 
                 </select> 
-                <a href="javascript:ClientSearchNews();" id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>    
+                <a  onClick={()=>ClientSearchNews()} id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>    
               </div> 
             </div> 
           </div> 

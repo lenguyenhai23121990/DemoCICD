@@ -14,7 +14,7 @@ const screens: any = {
   "contentdetail/FormCollectionHome": "contentdetail/FormCollectionHome",
   "contentdetail/FormDetailBook": "contentdetail/FormDetailBook",
   "contentdetail/FromDetailNews": "contentdetail/FromDetailNews",
-  "contentdetail/FromSearch": "contentdetail/FromSearch",
+  "contentdetail/search/FromSearch": "contentdetail/search/FromSearch",
   
   // "service1/master": "service1/master/List",
   // "service1/detail": "service1/detail/List",

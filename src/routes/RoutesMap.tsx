@@ -14,7 +14,7 @@ const RoutesMap: any = {
   'contentdetail/FormCollectionHome': { path: '/CollectionHome' },
   'contentdetail/FormDetailBook': { path: '/DetailBook' },
   'contentdetail/FromDetailNews': { path: '/DetailNews' },
-  'contentdetail/FromSearch': { path: '/Search' },
+  'contentdetail/search/FromSearch': { path: '/Search' },
   // 'service1/detail': { path: '/service1/detail' },
   // 'service2/master': { path: '/service2/master' },
   // 'service2/detail': { path: '/service2/detail' },

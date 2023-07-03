@@ -8,7 +8,9 @@ import FromRefindSearch from '../Search/FromRefindSearch'
 interface State {
 
 }
-type Props = State
+type Props = {
+    data?: any;
+}
 const FromSearch = (props: Props) => {
 
     return (
@@ -46,7 +48,7 @@ const FromSearch = (props: Props) => {
                             </div> */}
                             <FromRefindSearch></FromRefindSearch>
 
-                            
+
                         </div>
                         <div className="col-sm-9">
                             <div className="row">
@@ -75,7 +77,7 @@ const FromSearch = (props: Props) => {
                                         id="uncontrolled-tab-example"
                                         className="divTabsContainerFormSearch"
                                     >
-                                        <Tab eventKey="home" title="CƠ BẢN">
+                                        <Tab eventKey="home" title="CƠ BẢN111">
                                             <div className="col-sm-12">
                                                 <div className="row">
                                                     <div className="col-sm-9">
@@ -515,14 +517,37 @@ const FromSearch = (props: Props) => {
                                                         <div className="tab-pane active" id="panel-intro143562">
                                                             <dl id="divBibInfo143562" style={{ display: 'none' }} className="doc-dl">
                                                             </dl>
-                                                            <div id="divBibDetail143562" className="media doc-details">    <div className="media-body">
-                                                                <dl>
-                                                                    <div style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }} className="col-sm-12 col-md-12 col-12"><strong>Loại CSDL: &nbsp;</strong>
-                                                                        <dd style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>Ảnh</dd> </div>
-                                                                    <div style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }} className="col-sm-12 col-md-12 col-12"><strong>Năm: &nbsp;</strong>
-                                                                        <dd style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>2023</dd> </div>
-                                                                </dl>
-                                                            </div>
+                                                            <div id="divBibDetail143562" className="media doc-details">
+                                                                <div id="divBibDetail143562" className="media doc-details">    <div className="media-left">
+                                                                    <a href="#"><img alt="..." src="http://113.160.187.1:82/pages/opac/images/no-thumb/nothumb.jpg" className="media-object" /></a>
+                                                                </div>
+                                                                    <div className="media-body">
+                                                                        <dl>
+                                                                            <dd> <dl >
+                                                                                <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Phân loại BBK:</strong></dd>
+                                                                                <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>351.597/ C 120 N
+                                                                                </dd>
+                                                                            </dl> </dd>
+                                                                            <dd> <dl >
+                                                                                <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Thông tin xb:</strong></dd>
+                                                                                <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>H.: Lao động, 2022</dd>
+                                                                            </dl> </dd>
+                                                                            <dd> <dl >
+                                                                                <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Mô tả vật lý:</strong></dd>
+                                                                                <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>391tr., 28cm</dd>
+                                                                            </dl> </dd>
+                                                                            <dd> <dl >
+                                                                                <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Tóm tắt:</strong></dd>
+                                                                                <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>Nội dung Luật thư viện và văn bản hướng dẫn thi hành; Luật lưu trữ và văn bản hướng dẫn thi hành; quy định về công tác văn thư và thể thức, kỹ thuật trình bày văn bản hành chính và bản sao văn bản;...</dd>
+                                                                            </dl> </dd>
+                                                                            <dd> <dl >
+                                                                                <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Từ khóa:</strong></dd> <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}><a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Luật Thư viện.html">Luật Thư viện</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Luật Lưu trữ.html">Luật Lưu trữ</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Công tác văn thư lưu trữ.html">Công tác văn thư lưu trữ</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Soạn thảo văn bản.html">Soạn thảo văn bản</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Hợp đồng.html">Hợp đồng</a> </dd>
+                                                                            </dl> </dd>
+                                                                        </dl>
+                                                                    </div>
+                                                                    <div className="media-right">
+                                                                        <img alt="" src="http://113.160.187.1:82/pages/opac/TempDir/qrcode/ILIB/1/75565.jpg" className="qr" />
+                                                                    </div> </div>
                                                             </div>
                                                             <div id="divBibDetailView143562" className="table-wrap" style={{ display: 'none' }} />
                                                             <div id="divBibDigitalInfo143562" className="table-wrap" style={{ display: 'none' }} />
@@ -579,14 +604,38 @@ const FromSearch = (props: Props) => {
                                                             <div className="tab-pane active" id="panel-intro143563">
                                                                 <dl id="divBibInfo143563" style={{ display: 'none' }} className="doc-dl">
                                                                 </dl>
-                                                                <div id="divBibDetail143563" className="media doc-details">    <div className="media-body">
-                                                                    <dl>
-                                                                        <div style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }} className="col-sm-12 col-md-12 col-12"><strong>Loại CSDL: &nbsp;</strong>
-                                                                            <dd style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>Ảnh</dd> </div>
-                                                                        <div style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }} className="col-sm-12 col-md-12 col-12"><strong>Năm: &nbsp;</strong>
-                                                                            <dd style={{ float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>2023</dd> </div>
-                                                                    </dl>
-                                                                </div>
+                                                                <div id="divBibDetail143563" className="media doc-details">
+                                                                    <div id="divBibDetail143562" className="media doc-details">    <div className="media-left">
+                                                                        <a href="#"><img alt="..." src="http://113.160.187.1:82/pages/opac/images/no-thumb/nothumb.jpg" className="media-object" /></a>
+                                                                    </div>
+                                                                        <div className="media-body">
+                                                                            <dl>
+                                                                                <dd> <dl >
+                                                                                    <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Phân loại BBK:</strong></dd>
+                                                                                    <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>351.597/ C 120 N
+                                                                                    </dd>
+                                                                                </dl> </dd>
+                                                                                <dd> <dl >
+                                                                                    <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Thông tin xb:</strong></dd>
+                                                                                    <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>H.: Lao động, 2022</dd>
+                                                                                </dl> </dd>
+                                                                                <dd> <dl >
+                                                                                    <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Mô tả vật lý:</strong></dd>
+                                                                                    <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>391tr., 28cm</dd>
+                                                                                </dl> </dd>
+                                                                                <dd> <dl >
+                                                                                    <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Tóm tắt:</strong></dd>
+                                                                                    <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>Nội dung Luật thư viện và văn bản hướng dẫn thi hành; Luật lưu trữ và văn bản hướng dẫn thi hành; quy định về công tác văn thư và thể thức, kỹ thuật trình bày văn bản hành chính và bản sao văn bản;...</dd>
+                                                                                </dl> </dd>
+                                                                                <dd> <dl >
+                                                                                    <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Từ khóa:</strong></dd> <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}><a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Luật Thư viện.html">Luật Thư viện</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Luật Lưu trữ.html">Luật Lưu trữ</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Công tác văn thư lưu trữ.html">Công tác văn thư lưu trữ</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Soạn thảo văn bản.html">Soạn thảo văn bản</a>;&nbsp;<a className="text-info" href="../opac/wpid-search-stype-form-quick-sfield-all-keyword-Hợp đồng.html">Hợp đồng</a> </dd>
+                                                                                </dl> </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div className="media-right">
+                                                                            <img alt="" src="http://113.160.187.1:82/pages/opac/TempDir/qrcode/ILIB/1/75565.jpg" className="qr" />
+                                                                        </div> </div>
+
                                                                 </div>
                                                                 <div id="divBibDetailView143563" className="table-wrap" style={{ display: 'none' }} />
                                                                 <div id="divBibDigitalInfo143563" className="table-wrap" style={{ display: 'none' }} />

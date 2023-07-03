@@ -1,6 +1,6 @@
 window._env_ = {
     PROFILE: "development",
-    API_URL: "http://localhost:5555/",
+    API_URL: "http://localhost:52419/api/",
     TIMEOUT: "60",//minutes
     USE_CAPTCHA: false,
     HOME_PATH: "/",

@@ -4,9 +4,15 @@ import Carousel from 'react-bootstrap/Carousel';
 interface State {
 
 }
-type Props = State
+type Props = {
+    Keyword?:string;
+    Cate? :string;
+}
 const BannerHeader = (props: Props) => {
-
+const ClientSearchNews=()=>
+{
+    console.log("22222222");
+}
     return (
 
         <Carousel>
@@ -28,7 +34,7 @@ const BannerHeader = (props: Props) => {
                             <option value="keyword">Từ khóa</option>
                             <option value="yearpub">Năm xuất bản</option>
                         </select>
-                        <a href="javascript:ClientSearchNews();" id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>
+                        <a  href="#" onClick={()=>ClientSearchNews()} id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,9 @@
-import { Button, Column, DataTable, Dialog, InputText, classNames } from 'primereact';
+import classNames from 'classnames';
+import { Button } from 'primereact/button';
+import { Column} from 'primereact/column';
+import { DataTable} from 'primereact/datatable';
+import { Dialog} from 'primereact/dialog';
+import { InputText} from 'primereact/inputtext';
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { connect } from 'react-redux';

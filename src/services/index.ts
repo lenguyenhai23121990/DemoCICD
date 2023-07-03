@@ -2,6 +2,7 @@ import UMSService from "./UserService"
 import SV1Service from "./SV1Service"
 import SV2Service from "./SV2Service"
 import ReaderService from "./ReaderService"
+import SearchService from "./SearchService"
 
 const ENV = window._env_
 export default ENV
@@ -10,6 +11,7 @@ export {
     SV1Service,
     SV2Service,
     ReaderService,
+    SearchService
 }
 
 export const Logger = {
