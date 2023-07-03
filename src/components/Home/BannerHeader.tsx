@@ -1,5 +1,8 @@
 import React from "react"
 import Carousel from 'react-bootstrap/Carousel';
+import ImageBanner1 from "../../assets/Image/2cf9d87d-bb41-47a9-8ed8-be87b9e6b700Binh minh duong day - Chay home.jpg"
+import ImageBanner2 from "../../assets/Image/58e460f4-c9a7-49f9-b5d8-c5bf7a4be8ce927ddc2f-0dea-4551-bdcb-0acd6aeeae0dtoancanhnhamay.png"
+import ImageBanner3 from "../../assets/Image/f7989008-c8f4-4065-8f74-3a018aea1fb2Nhiet dien Duyen Hai 1 - Chay home.jpg";
 
 interface State {
 
@@ -39,7 +42,7 @@ const ClientSearchNews=()=>
                 </div>
             </div>
                 </Carousel.Caption>
-                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src="http://10.161.10.104:8886/pages/cms/images/202011/2cf9d87d-bb41-47a9-8ed8-be87b9e6b700Binh minh duong day - Chay home.jpg" />
+                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src={ImageBanner1} />
 
             </Carousel.Item>
 
@@ -66,7 +69,7 @@ const ClientSearchNews=()=>
                 </div>
             </div>
                 </Carousel.Caption>
-                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src="http://10.161.10.104:8886/pages/cms/images/202011/58e460f4-c9a7-49f9-b5d8-c5bf7a4be8ce927ddc2f-0dea-4551-bdcb-0acd6aeeae0dtoancanhnhamay.png" />
+                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src={ImageBanner2} />
             </Carousel.Item>
 
             <Carousel.Item>
@@ -94,7 +97,7 @@ const ClientSearchNews=()=>
                 </div>
             </div>
                 </Carousel.Caption>
-                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src="http://10.161.10.104:8886/pages/cms/images/202011/f7989008-c8f4-4065-8f74-3a018aea1fb2Nhiet dien Duyen Hai 1 - Chay home.jpg" />
+                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src={ImageBanner3} />
             </Carousel.Item>
 
             <Carousel.Item>
@@ -121,7 +124,7 @@ const ClientSearchNews=()=>
                 </div>
             </div>
                 </Carousel.Caption>
-                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src="http://10.161.10.104:8886/pages/cms/images/202011/58e460f4-c9a7-49f9-b5d8-c5bf7a4be8ce927ddc2f-0dea-4551-bdcb-0acd6aeeae0dtoancanhnhamay.png" />
+                <img className="bd-placeholder-img imageBannerCarousel" width="100%" height="100%" src={ImageBanner2} />
             </Carousel.Item>
             
         </Carousel>

@@ -1,5 +1,5 @@
 import React from "react"
-
+import mdihomeoutline from "../../assets/Image/mdi_home-outline.png";
 
 interface State {
 
@@ -14,7 +14,7 @@ const MenuTop = (props: Props) => {
                         <div className="container-fluid">
                             <div>
                                 <ul className="nav navbar-nav">
-                                    <li className="nav-item align-self-center "><a href="/Home"><img src="http://10.161.10.104:8886/pages/cms/img/mdi_home-outline.png" /></a></li>
+                                    <li className="nav-item align-self-center "><a href="/Home"><img src={mdihomeoutline} /></a></li>
                                     <li className="align-self-center "><a href="/Search" target="_self">TRA CỨU DỮ LIỆU</a></li>
                                     <li className="align-self-center "><a href="/CollectionHome">BỘ SƯU TẬP</a></li>
                                     <li className="align-self-center "><a href="/CategoryNews" target="_self">ĐIỂM BÁO</a></li>

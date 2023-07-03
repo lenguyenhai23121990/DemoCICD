@@ -1,5 +1,5 @@
 import React from "react"
-
+import ImageCollection from "../../assets/Image/ImageCollection.jpg";
 
 interface State {
 
@@ -38,7 +38,7 @@ const CollectionHome = (props: Props) => {
                                 <h3 className="header1"><a href="http://tudienkythuatdien.evn.com.vn">TỪ ĐIỂN KỸ THUẬT ĐIỆN</a><hr id="hrcolor" /> </h3>
                                 <div id="myCarouselCollection">
                                     <div className="carousel-inner">
-                                        <a href="http://tudienkythuatdien.evn.com.vn"><img src="http://10.161.10.104:8886/pages/cms/img/ImageCollection.jpg" alt="" /></a>
+                                        <a href="http://tudienkythuatdien.evn.com.vn"><img src={ImageCollection} alt="" /></a>
                                     </div>
                                 </div>
                             </div></div></section>

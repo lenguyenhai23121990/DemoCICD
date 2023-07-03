@@ -7,6 +7,7 @@ import { initState, initValues } from './InitState';
 import { ActionCreators, reducer } from './Reducer';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import XemChiTiet from "../../../assets/Image/XemChiTiet.png"
 // import SearchModel from './Model';
 interface State {
 
@@ -198,7 +199,7 @@ const FromSearch = (props: Props) => {
       <section>
          <div>
         <div id="ImageTopBanner" className="carousel slide" data-ride="carousel"> 
-          <img src="http://10.161.10.104:8886/pages/cms/img/XemChiTiet.png" alt="" /> 
+          <img src={XemChiTiet} alt="" /> 
           <div className="row col-md-12" id="searchBannerSubPage">  
             <div className="container"> 
               <div className="row">

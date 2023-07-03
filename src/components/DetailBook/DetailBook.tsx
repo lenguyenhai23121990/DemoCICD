@@ -1,4 +1,5 @@
 import React from "react"
+import QrCode from "../../assets/Image/63561.jpg"
 
 
 interface State {
@@ -81,7 +82,7 @@ const DetailBook = (props: Props) => {
                         </div> 
                       </div> </div><div className="col-md-2 col-2">
                       <div style={{backgroundColor: '#FAFAFA'}}> 
-                        <img alt="" className="ImageQRCodeDetailBib" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/63561.jpg" />
+                        <img alt="" className="ImageQRCodeDetailBib" src={QrCode} />
                       </div> 
                     </div></div></div> 
                 <div className="row col-12">   

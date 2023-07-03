@@ -1,5 +1,5 @@
 import React from "react"
-
+import ImageCollection from "../../assets/Image/7e93b110-44b5-47ad-9972-2c77ae9125daimage003.jpg"
 
 interface State {
 
@@ -505,7 +505,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3875', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Lãnh đạo</p>
                                     </div>
                                 </div>
@@ -515,7 +515,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','7762', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Đồng nghiệp EVN</p>
                                     </div>
                                 </div>
@@ -525,7 +525,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick={javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3876', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Đảng</p>
                                     </div>
                                 </div>
@@ -535,7 +535,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3877', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Công đoàn</p>
                                     </div>
                                 </div>
@@ -545,7 +545,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3878', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Đoàn thanh niên</p>
                                     </div>
                                 </div>
@@ -555,7 +555,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3879', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>An sinh xã hội</p>
                                     </div>
                                 </div>
@@ -565,7 +565,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3881', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Hợp tác</p>
                                     </div>
                                 </div>
@@ -575,7 +575,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3882', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Hội nghị, hội thảo, hội họp</p>
                                     </div>
                                 </div>
@@ -585,7 +585,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3883', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Nghi lễ</p>
                                     </div>
                                 </div>
@@ -595,7 +595,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3884', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Triển lãm</p>
                                     </div>
                                 </div>
@@ -605,7 +605,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3903', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Văn hóa EVN</p>
                                     </div>
                                 </div>
@@ -615,7 +615,7 @@ const CollectionImage = (props: Props) => {
                                     <div>
                                         <a
                                         //   onclick="javascript:ClientSubCollectionNoteSelectedImage('cms','Collection','3887', '0');"
-                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src="http://10.161.10.104:8886/pages/cms/TempDir/cms/bib/27736/202101260424456017f670-08b0-44ae-b3ca-49afba8d381b/42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f42e7ff1c-abc7-4e6d-8cc1-61dcf4869e0f.jpg" /></a>
+                                        >		    <img alt="" id="imgCollectionImage" className="card-img-top border" src={ImageCollection} /></a>
                                         <p>Nguồn điện</p>
                                     </div>
                                 </div>

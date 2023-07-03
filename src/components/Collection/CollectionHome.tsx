@@ -1,5 +1,7 @@
 import React from "react"
-
+import TC_Nganhdien from "../../assets/Image/01TC_Nganhdien.jpg"
+import SANGKIEN from "../../assets/Image/03SANGKIEN.jpg"
+import HomeModulImage from "../../assets/Image/HomeModulImage.jpg"
 
 interface State {
 
@@ -29,7 +31,7 @@ const CollectionHome = (props: Props) => {
                                 <div className="row">
                                     <div className="col-md-4 col-sm-4">
                                         <div className="media-body">
-                                            <div> <a href="/pages/cms/collection-id-7.html"> <img src="http://10.161.10.104:8886/pages/cms/tempdir/collection/202102241052-10b9be61-31bb-4946-a4d4-28170fe4a524/01TC_Nganhdien.jpg" className="media-object" alt="" /></a></div>
+                                            <div> <a href="/pages/cms/collection-id-7.html"> <img src={TC_Nganhdien} className="media-object" alt="" /></a></div>
                                             <h4 className="media-heading" style={{ textAlign: 'center' }}><a href="/pages/cms/collection-tap-chi-trong-nuoc-id-7.html">Tạp chí trong nước</a> </h4>
                                             <div className="divDescriptionCollectionHome">  <span style={{ verticalAlign: 'middle' }}>  14 đầu tạp chí với trên 1.800 số báo là nguồn thông tin giá trị giúp hỗ trợ các nhà quản lý, nhà khoa học đưa ra những quyết định, những giải pháp để đạt được kết quả cao nhất.</span>
                                             </div>
@@ -37,7 +39,7 @@ const CollectionHome = (props: Props) => {
                                     </div>
                                     <div className="col-md-4 col-sm-4">
                                         <div className="media-body">
-                                            <div> <a href="/pages/cms/collection-id-107.html"> <img src="http://10.161.10.104:8886/pages/cms/tempdir/collection/202102241054-296af590-4b5a-4df1-ad4e-95c48c97cc72/03SANGKIEN.jpg" className="media-object" alt="" /></a></div>
+                                            <div> <a href="/pages/cms/collection-id-107.html"> <img src={SANGKIEN} className="media-object" alt="" /></a></div>
                                             <h4 className="media-heading" style={{ textAlign: 'center' }}><a href="/pages/cms/collection-sang-kien-id-107.html">Sáng kiến</a> </h4>
                                             <div className="divDescriptionCollectionHome">  <span style={{ verticalAlign: 'middle' }}>  174 sáng kiến về nhiều lĩnh vực đã được áp dụng vào thực tế và mạng lại hiệu quả thiết thực cho các đơn vị trong ngành Điện.</span>
                                             </div>
@@ -45,7 +47,7 @@ const CollectionHome = (props: Props) => {
                                     </div>
                                     <div className="col-md-4 col-sm-4">
                                         <div className="media-body">
-                                            <div> <a href="/pages/cms/collection-id-3874.html"> <img src="http://10.161.10.104:8886/pages/cms/tempdir/collection/202105311018-d55bc884-6fa0-4e46-8d9c-01a75cbbe2d9/HomeModulImage.jpg" className="media-object" alt="" /></a></div>
+                                            <div> <a href="/pages/cms/collection-id-3874.html"> <img src={HomeModulImage} className="media-object" alt="" /></a></div>
                                             <h4 className="media-heading" style={{ textAlign: 'center' }}><a href="/pages/cms/collection-anh-id-3874.html">Ảnh</a> </h4>
                                             <div className="divDescriptionCollectionHome">  <span style={{ verticalAlign: 'middle' }}>  Trên 44.000 hình ảnh đã được lưu giữ như là những tư liệu sinh động quý giá bằng hình về quá trình hình thành, phát triển của ngành Điện trong hơn 125 năm phát triển.</span>
                                             </div>

@@ -1,5 +1,6 @@
 import React from "react"
-
+import Tapdoandienluc from "../../assets/Image/Tapdoandienluc.png";
+import nhatruyenthong from "../../assets/Image/nhatruyenthong.png";
 
 interface State {
 
@@ -62,8 +63,8 @@ const LinkFooterHome = (props: Props) => {
                         </ul>
                     </div>
                     <div className="col-md-3 left ImagerFooterRight">
-                        <a href="https://www.evn.com.vn" target="_blank"> <img className="w-200" src="http://10.161.10.104:8886/pages/cms/images/Tapdoandienluc.png" /> </a>
-                        <a href="https://nhatruyenthong.evn.com.vn" target="_blank"><img className="w-200-1" src="http://10.161.10.104:8886/pages/cms/images/nhatruyenthong.png" /> </a>
+                        <a href="https://www.evn.com.vn" target="_blank"> <img className="w-200" src={Tapdoandienluc} /> </a>
+                        <a href="https://nhatruyenthong.evn.com.vn" target="_blank"><img className="w-200-1" src={nhatruyenthong} /> </a>
                     </div>
                 </div>
             </div>

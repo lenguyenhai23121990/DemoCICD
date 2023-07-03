@@ -1,5 +1,6 @@
 import React from "react"
-
+import HomeModulImage from "../../assets/Image/HomeModulImage.png";
+import HomeModulVideo from "../../assets/Image/HomeModulVideo.png";
 
 interface State {
 
@@ -17,7 +18,7 @@ const ImageVideoHome = (props: Props) => {
                         <h3 className="header1"><a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-3874.html">Ảnh</a><hr id="hrcolor" /></h3>
                         <div className="divImageLeft">
                             <div id="divImager" className="sideWrapIn">
-                                <a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-3874.html"> <img src="http://10.161.10.104:8886/pages/cms/img/HomeModulImage.png" /> </a>
+                                <a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-3874.html"> <img src={HomeModulImage} /> </a>
                             </div>
                         </div>
                     </div>
@@ -25,7 +26,7 @@ const ImageVideoHome = (props: Props) => {
                         <h3 className="header1"><a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-5287.html">Video</a><hr id="hrcolor" /></h3>
                         <div className="divVideoRight">
                             <div id="divVideoIntroductBook" className="sideWrapIn">
-                                <a href="/pages/cms/collection-hinh-anh-video-id-5287.html"><img src="http://10.161.10.104:8886/pages/cms/img/HomeModulVideo.png" /> </a>
+                                <a href="/pages/cms/collection-hinh-anh-video-id-5287.html"><img src={HomeModulVideo} /> </a>
                             </div>
                         </div>
                     </div>
