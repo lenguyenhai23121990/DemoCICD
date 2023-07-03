@@ -35,6 +35,12 @@ const FromSearch = (props: Props) => {
   const [CategoryBibGet, setCategoryBibGet] = React.useState("");
   const [CurrentPage, setCurrentPage] = React.useState(0);
   const [collapseTwoRSBibType, setcollapseTwoRSBibType] = React.useState("panel-collapse collapse  in show ");
+  const [collapseTwoRSKeyword, setcollapseTwoRSKeyword] = React.useState("panel-collapse collapse  in show ");
+  const [collapseTwoRSAuthor, setcollapseTwoRSAuthor] = React.useState("panel-collapse collapse  in show ");
+  const [collapseTwoRSPubyear, setcollapseTwoRSPubyear] = React.useState("panel-collapse collapse  in show ");
+  const [collapseTwoRSSubject, setcollapseTwoRSSubject] = React.useState("panel-collapse collapse  in show ");
+  
+
   const [orderby, setorderby] = React.useState("ID");
   const [pageSize, setpageSize] = React.useState(10);
   //const [MaxpageCount, setMaxpageCount] = React.useState(0);
@@ -77,7 +83,12 @@ const FromSearch = (props: Props) => {
     }
 
     ActionCreators.BasicSearch(dispatch, ModelSearch);
-    console.log("initState.item.TotalRecordinitState.item.TotalRecord", state);
+    ActionCreators.BasicSearch_Refind_Keyword(dispatch, ModelSearch);
+    // ActionCreators.BasicSearch_Refind_BibType(dispatch, ModelSearch);
+    // ActionCreators.BasicSearch_Refind_Author(dispatch, ModelSearch);
+    // ActionCreators.BasicSearch_Refind_PubYear(dispatch, ModelSearch);
+    // ActionCreators.BasicSearch_Refind_Subject(dispatch, ModelSearch);
+    console.log("3333333333333333333 lnhai", state);
   }
   const ClientQuickSearch = (page: number , pageSize:number, orderby:string , Keyword:string , CateSearch: string ) => {
 
@@ -100,7 +111,11 @@ const FromSearch = (props: Props) => {
     }
 
     ActionCreators.QuickSearch(dispatch, ModelSearch);
-    console.log("initState.item.TotalRecordinitState.item.TotalRecord", state);
+    ActionCreators.QuickSearch_Refind_BibType(dispatch, ModelSearch);
+    ActionCreators.QuickSearch_Refind_Author(dispatch, ModelSearch);
+    ActionCreators.QuickSearch_Refind_Keyword(dispatch, ModelSearch);
+    ActionCreators.QuickSearch_Refind_PubYear(dispatch, ModelSearch);
+    ActionCreators.QuickSearch_Refind_Subject(dispatch, ModelSearch);
     
     
   }
@@ -116,13 +131,66 @@ const FromSearch = (props: Props) => {
       let IndexShow =exampleAttr?.indexOf("show");
       if (IndexShow)
       {
-        if (IndexShow>0){
-          setcollapseTwoRSBibType("panel-collapse in collapse ");
+       
+        switch(CateRefindSearch){
+          case 'collapseTwoRSBibType':
+            if (IndexShow>0){
+              setcollapseTwoRSBibType("panel-collapse in collapse ");
+            }
+            else
+            {
+              setcollapseTwoRSBibType("panel-collapse collapse  in show ");
+            }
+            return '';
+          case 'collapseTwoRSSubject':
+            if (IndexShow>0){
+            
+              setcollapseTwoRSSubject("panel-collapse in collapse ");
+            }
+            else
+            {
+     
+              setcollapseTwoRSSubject("panel-collapse collapse  in show ");
+            }
+            return '';
+          case 'collapseTwoRSKeyword':
+            if (IndexShow>0){
+
+              setcollapseTwoRSKeyword("panel-collapse in collapse ");
+            }
+            else
+            {
+
+              setcollapseTwoRSKeyword("panel-collapse collapse  in show ");
+            }
+            return '';
+          case 'collapseTwoRSYear':
+            if (IndexShow>0){
+              setcollapseTwoRSPubyear("panel-collapse in collapse ");
+            }
+            else
+            {
+              setcollapseTwoRSPubyear("panel-collapse collapse  in show ");
+            }
+            return '';
+          case 'collapseTwoRSAuthor':
+            if (IndexShow>0){
+              setcollapseTwoRSAuthor("panel-collapse in collapse ");
+            }
+            else
+            {
+              setcollapseTwoRSAuthor("panel-collapse collapse  in show ");
+            }
+            return '';
+          
         }
-        else
-        {
-          setcollapseTwoRSBibType("panel-collapse collapse  in show ");
-        }
+        // if (IndexShow>0){
+        //   setcollapseTwoRSBibType("panel-collapse in collapse ");
+        // }
+        // else
+        // {
+        //   setcollapseTwoRSBibType("panel-collapse collapse  in show ");
+        // }
       }
     }
       
@@ -197,7 +265,10 @@ const FromSearch = (props: Props) => {
       {/* <BannerDetail MethodParent={MethodParent}></BannerDetail> */}
 
       <section>
-         <div>
+
+      
+
+      <div>
         <div id="ImageTopBanner" className="carousel slide" data-ride="carousel"> 
           <img src={XemChiTiet} alt="" /> 
           <div className="row col-md-12" id="searchBannerSubPage">  
@@ -266,11 +337,31 @@ const FromSearch = (props: Props) => {
                       </h4>
                     </div>
                     <div id="collapseTwoRSBibType" className={collapseTwoRSBibType} >
+                            
                       <div id="divRSBibType" className="panel-body overflow-auto">
-                        <p><input type="checkbox"
-                          // onclick="javascript:ClientSearchRefineQuickSearch();"
-                          name="RSBibType" className="form-check-input" id="chkrs_rsbibtype_0" defaultValue="rsbibtype$Ảnh" /><label className="form-check-label" htmlFor="chkrs_rsbibtype_0">Ảnh</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                        </p>
+                        {
+                         state.items_BibType_Search?
+                          state.items_BibType_Search.Results ?
+                            state.items_BibType_Search.Results.map((item: any, index: number) => {
+
+                              return (
+                                <>
+                                    <p>
+                                          <input type="checkbox"
+                                          // onclick="javascript:ClientSearchRefineQuickSearch();"
+                                          name="RSBibType" className="form-check-input" id="chkrs_rsbibtype_0" defaultValue="rsbibtype$Ảnh" />
+                                          <label className="form-check-label" htmlFor="chkrs_rsbibtype_0">{item.VALUE}</label>  
+                                          <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                    </p>
+                                </>
+                              )
+                            })
+                            : ""
+                            :""
+
+                        }
+                       
+
                       </div>
                     </div>
                   </div>
@@ -282,12 +373,32 @@ const FromSearch = (props: Props) => {
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseTwoRSAuthor" className="panel-collapse collapse  in ">
+                      <div id="collapseTwoRSAuthor" className={collapseTwoRSAuthor}>
                         <div id="divRSAuthor" className="panel-body overflow-auto">
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSAuthor" className="form-check-input" id="chkrs_rsauthor_0" defaultValue="rsauthor$Phạm Duy Quang Huy" /><label className="form-check-label" htmlFor="chkrs_rsauthor_0">Phạm Duy Quang Huy</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
+
+                        {
+                         state.items_Authors_Search?
+                          state.items_Authors_Search.Results ?
+                            state.items_Authors_Search.Results.map((item: any, index: number) => {
+
+                              return (
+                                <>
+                                  
+                                    <p><input type="checkbox"
+                                      // onclick="javascript:ClientSearchRefineQuickSearch();"
+                                      name="RSAuthor" className="form-check-input" id="chkrs_rsauthor_0" defaultValue="rsauthor$Phạm Duy Quang Huy" />
+                                      <label className="form-check-label" htmlFor="chkrs_rsauthor_0">{item.VALUE}</label>  
+                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                    </p>
+                                </>
+                              )
+                            })
+                            : ""
+                            :""
+
+                        }
+                         
+
                         </div>
                       </div>
                     </div>
@@ -299,12 +410,31 @@ const FromSearch = (props: Props) => {
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseTwoRSYear" className="panel-collapse collapse  in ">
+                      <div id="collapseTwoRSYear" className={collapseTwoRSPubyear}>
                         <div id="divRSYear" className="panel-body overflow-auto">
-                          <p><input type="checkbox"
-                            //  onclick="javascript:ClientSearchRefineQuickSearchYear();" 
-                            name="RSYear" className="form-check-input" id="chkrs_rsyear_0" defaultValue="rsyear$25/11/2020" /><label className="form-check-label" htmlFor="chkrs_rsyear_0">25/11/2020</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
+                          
+                          
+
+                          {
+                         state.items_Pubyear_Search?
+                          state.items_Pubyear_Search.Results ?
+                            state.items_Pubyear_Search.Results.map((item: any, index: number) => {
+
+                              return (
+                                <>
+                                    <p><input type="checkbox"
+                                      //  onclick="javascript:ClientSearchRefineQuickSearchYear();" 
+                                      name="RSYear" className="form-check-input" id="chkrs_rsyear_0" defaultValue="rsyear$25/11/2020" />
+                                      <label className="form-check-label" htmlFor="chkrs_rsyear_0">{item.VALUE}</label>  
+                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                    </p>
+                                </>
+                              )
+                            })
+                            : ""
+                            :""
+
+                        }
                         </div>
                       </div>
                     </div>
@@ -316,149 +446,64 @@ const FromSearch = (props: Props) => {
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseTwoRSKeyword" className="panel-collapse collapse  in ">
+                      <div id="collapseTwoRSKeyword" className={collapseTwoRSKeyword}>
                         <div id="divRSKeyword" className="panel-body overflow-auto">
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_0" defaultValue="rskeyword$Lần thứ 38" /><label className="form-check-label" htmlFor="chkrs_rskeyword_0">Lần thứ 38</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_1" defaultValue="rskeyword$CAFEO 38" /><label className="form-check-label" htmlFor="chkrs_rskeyword_1">CAFEO 38</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_2" defaultValue="rskeyword$Hội nghị" /><label className="form-check-label" htmlFor="chkrs_rskeyword_2">Hội nghị</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_3" defaultValue="rskeyword$Tổ chức Kỹ sư ASEAN" /><label className="form-check-label" htmlFor="chkrs_rskeyword_3">Tổ chức Kỹ sư ASEAN</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>11</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_4" defaultValue="rskeyword$Phó chủ tịch" /><label className="form-check-label" htmlFor="chkrs_rskeyword_4">Phó chủ tịch</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>6</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_5" defaultValue="rskeyword$Liên hiệp các Hội Khoa học và Kỹ thuật Việt Nam" /><label className="form-check-label" htmlFor="chkrs_rskeyword_5">Liên hiệp các Hội Khoa học và Kỹ thuật Việt Nam</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>6</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_6" defaultValue="rskeyword$Kỹ sư chuyên nghiệp ASEAN" /><label className="form-check-label" htmlFor="chkrs_rskeyword_6">Kỹ sư chuyên nghiệp ASEAN</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>6</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_7" defaultValue="rskeyword$Chứng nhận" /><label className="form-check-label" htmlFor="chkrs_rskeyword_7">Chứng nhận</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>6</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_8" defaultValue="rskeyword$Nghiêm Vũ Khải" /><label className="form-check-label" htmlFor="chkrs_rskeyword_8">Nghiêm Vũ Khải</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>4</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_9" defaultValue="rskeyword$Hội đồng đăng bạ kỹ sư ASEAN của Việt Nam" /><label className="form-check-label" htmlFor="chkrs_rskeyword_9">Hội đồng đăng bạ kỹ sư ASEAN của Việt Nam</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>3</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_10" defaultValue="rskeyword$Phạm Văn Tạc" /><label className="form-check-label" htmlFor="chkrs_rskeyword_10">Phạm Văn Tạc</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>3</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_11" defaultValue="rskeyword$Chủ tịch" /><label className="form-check-label" htmlFor="chkrs_rskeyword_11">Chủ tịch</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>3</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_12" defaultValue="rskeyword$Phạm Quang Thao" /><label className="form-check-label" htmlFor="chkrs_rskeyword_12">Phạm Quang Thao</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>2</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_13" defaultValue="rskeyword$Hội Điện lực Việt Nam" /><label className="form-check-label" htmlFor="chkrs_rskeyword_13">Hội Điện lực Việt Nam</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>2</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_14" defaultValue="rskeyword$GS.VS.TSKH Trần Đình Long" /><label className="form-check-label" htmlFor="chkrs_rskeyword_14">GS.VS.TSKH Trần Đình Long</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>2</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_15" defaultValue="rskeyword$Phát biểu" /><label className="form-check-label" htmlFor="chkrs_rskeyword_15">Phát biểu</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>2</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_16" defaultValue="rskeyword$Phó Tổng giám đốc" /><label className="form-check-label" htmlFor="chkrs_rskeyword_16">Phó Tổng giám đốc</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>2</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_17" defaultValue="rskeyword$Toàn cảnh" /><label className="form-check-label" htmlFor="chkrs_rskeyword_17">Toàn cảnh</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_18" defaultValue="rskeyword$Vũ Ðức Ðam" /><label className="form-check-label" htmlFor="chkrs_rskeyword_18">Vũ Ðức Ðam</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_19" defaultValue="rskeyword$Trưởng Ban tổ chức" /><label className="form-check-label" htmlFor="chkrs_rskeyword_19">Trưởng Ban tổ chức</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_20" defaultValue="rskeyword$Tổng công ty Điện lực TP.Hồ Chí Minh" /><label className="form-check-label" htmlFor="chkrs_rskeyword_20">Tổng công ty Điện lực TP.Hồ Chí Minh</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_21" defaultValue="rskeyword$Ngô Sơn Hải" /><label className="form-check-label" htmlFor="chkrs_rskeyword_21">Ngô Sơn Hải</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_22" defaultValue="rskeyword$Trình bày" /><label className="form-check-label" htmlFor="chkrs_rskeyword_22">Trình bày</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_23" defaultValue="rskeyword$Tổng công ty Điện lực TP Hồ Chí Minh" /><label className="form-check-label" htmlFor="chkrs_rskeyword_23">Tổng công ty Điện lực TP Hồ Chí Minh</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_24" defaultValue="rskeyword$Trần Khiêm Tuấn" /><label className="form-check-label" htmlFor="chkrs_rskeyword_24">Trần Khiêm Tuấn</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_25" defaultValue="rskeyword$EVN" /><label className="form-check-label" htmlFor="chkrs_rskeyword_25">EVN</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_26" defaultValue="rskeyword$Tổng công ty Điện lực miền Trung" /><label className="form-check-label" htmlFor="chkrs_rskeyword_26">Tổng công ty Điện lực miền Trung</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_27" defaultValue="rskeyword$Danh hiệu" /><label className="form-check-label" htmlFor="chkrs_rskeyword_27">Danh hiệu</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_28" defaultValue="rskeyword$Tổng công ty Điện lực miền Nam" /><label className="form-check-label" htmlFor="chkrs_rskeyword_28">Tổng công ty Điện lực miền Nam</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_29" defaultValue="rskeyword$Thành viên danh dự AFEO" /><label className="form-check-label" htmlFor="chkrs_rskeyword_29">Thành viên danh dự AFEO</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_30" defaultValue="rskeyword$Tham luận" /><label className="form-check-label" htmlFor="chkrs_rskeyword_30">Tham luận</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
-                          <p><input type="checkbox"
-                            //onclick="javascript:ClientSearchRefineQuickSearch();"
-                            name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_31" defaultValue="rskeyword$Phó Thủ tướng" /><label className="form-check-label" htmlFor="chkrs_rskeyword_31">Phó Thủ tướng</label>  <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>1</label>
-                          </p>
+                          
+                          {
+                         state.items_Keywords_Search?
+                          state.items_Keywords_Search.Results ?
+                            state.items_Keywords_Search.Results.map((item: any, index: number) => {
+
+                              return (
+                                <>
+                                    <p><input type="checkbox"
+                                      // onclick="javascript:ClientSearchRefineQuickSearch();" 
+                                      name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_0" defaultValue="rskeyword$Lần thứ 38" />
+                                      <label className="form-check-label" htmlFor="chkrs_rskeyword_0">{item.VALUE}</label>  
+                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                    </p>
+                                </>
+                              )
+                            })
+                            : ""
+                            :""
+
+                        }
                         </div>
                       </div>
                     </div>
                     <div className="panel panel-default widget-sidebar">
                       <div className="panel-heading">
                         <h4 className="panel-title panel-title-adjust">
-                          <a href="#collapseTwoRSSubject" data-toggle="collapse">
+                          <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSSubject')} data-toggle="collapse">
                             <i className="fa fa-plus-circle" /> Chủ đề
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseTwoRSSubject" className="panel-collapse collapse ">
+                      <div id="collapseTwoRSSubject" className={collapseTwoRSSubject}>
                         <div id="divRSSubject" className="overflow-auto">
+                        {
+                         state.items_Subject_Search?
+                          state.items_Subject_Search.Results ?
+                            state.items_Subject_Search.Results.map((item: any, index: number) => {
+
+                              return (
+                                <>
+                                 
+
+                                    <p><input type="checkbox"
+                                      // onclick="javascript:ClientSearchRefineQuickSearch();" 
+                                      name="RSSubject" className="form-check-input" id="chkrs_rssubject_0" defaultValue="rssubject$Lần thứ 38" />
+                                      <label className="form-check-label" htmlFor="chkrs_rssubject_0">{item.VALUE}</label>  
+                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                    </p>
+                                </>
+                              )
+                            })
+                            : ""
+                            :""
+
+                        }
                         </div>
                       </div>
                     </div>

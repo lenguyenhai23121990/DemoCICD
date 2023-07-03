@@ -3,6 +3,12 @@ import SV1Service from "./SV1Service"
 import SV2Service from "./SV2Service"
 import ReaderService from "./ReaderService"
 import SearchService from "./SearchService"
+import OBibTypesService from "./OBibTypesService"
+import OAuthorsService from "./OAuthorsService"
+import OKeywordsService from "./OKeywordsService"
+import OPubyearService from "./OPubyearService"
+import OSubjectService from "./OSubjectService"
+
 
 const ENV = window._env_
 export default ENV
@@ -11,7 +17,12 @@ export {
     SV1Service,
     SV2Service,
     ReaderService,
-    SearchService
+    SearchService,
+    OBibTypesService,
+    OAuthorsService,
+    OKeywordsService,
+    OPubyearService,
+    OSubjectService
 }
 
 export const Logger = {
