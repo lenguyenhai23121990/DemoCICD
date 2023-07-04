@@ -86,7 +86,7 @@ export const ActionCreators = {
 
         let response = await OBibTypesService.OAuthorsService.O_AUTHORS_BasicSearch(ModelSearch);
         if (response != null) {
-           
+            console.log("responsedataAuthorBasicSearch",response.data);
             dispatch({
                 type: ActionType.AuthorsQuickSearch,
                 items: response.data
@@ -116,7 +116,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OKeywordsService.O_KEYWORDS_BasicSearch(ModelSearch);
         if (response != null) {
-            console.log("responsedataAuthorBasicSearch",response.data);
+            
             dispatch({
                 type: ActionType.KeywordsQuickSearch,
                 items: response.data

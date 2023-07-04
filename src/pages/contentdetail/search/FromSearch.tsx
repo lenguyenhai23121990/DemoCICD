@@ -8,6 +8,7 @@ import { ActionCreators, reducer } from './Reducer';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import XemChiTiet from "../../../assets/Image/XemChiTiet.png"
+import { any } from "prop-types"
 // import SearchModel from './Model';
 interface State {
 
@@ -40,6 +41,9 @@ const FromSearch = (props: Props) => {
   const [collapseTwoRSPubyear, setcollapseTwoRSPubyear] = React.useState("panel-collapse collapse   ");
   const [collapseTwoRSSubject, setcollapseTwoRSSubject] = React.useState("panel-collapse collapse  ");
   
+  const [CateSearch, setCateSearch] = React.useState("");
+  const [ParaSearch, setParaSearch] = React.useState<any>();
+  const [KeywordQuickSearch, setKeywordQuickSearch] = React.useState("");
 
   const [orderby, setorderby] = React.useState("ID");
   const [pageSize, setpageSize] = React.useState(10);
@@ -53,11 +57,94 @@ const FromSearch = (props: Props) => {
   //   // setCategoryBibGet(props.CategoryBib);
   //   ActionCreators.QuickSearch(dispatch, KeywordGet, CategoryBibGet);
   // }
-  const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
+  //CateSearch,CateRefind,state.items_Authors_Search.CurrentPage+1
+const ShowMoreRefind =(CateSearch:string, CateRefind:string ,page:number)=>{
+    var ipageSize=page*10;
+  if(CateSearch=='basicsearch'){
+    ParaSearch.ipageSize =page;
+    if(CateRefind=='author')
+    {
+      console.log("1111111111",page);
+      ActionCreators.BasicSearch_Refind_Author(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='pubyear'){
+      ActionCreators.BasicSearch_Refind_PubYear(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='keyword'){
+      ActionCreators.BasicSearch_Refind_Keyword(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='Subject'){
+      ActionCreators.BasicSearch_Refind_Subject(dispatch, ParaSearch);
+    }
+  }
+  else {
+    ParaSearch.page =page;
+
+    if(CateRefind=='author')
+    {
+      ActionCreators.QuickSearch_Refind_Author(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='pubyear'){
+      ActionCreators.QuickSearch_Refind_PubYear(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='keyword'){
+      ActionCreators.QuickSearch_Refind_Keyword(dispatch, ParaSearch);
+    }
+    else if(CateRefind=='Subject'){
+      ActionCreators.QuickSearch_Refind_Subject(dispatch, ParaSearch);
+    }
+  }
+}
+
+const ClientSearchItem_Sort = (page: number , pageSize:number, orderby:string ) => {
+  if (CateSearch=='basicsearch'){
     setorderby(orderby);
     setpageSize(pageSize);
     setCurrentPage(page);
+    var ModelSearch =
+    {
+      Page:page,
+      PageSize: pageSize,
+      TITLE: TitleGet,
+      AUTHOR: AuthorGet,
+      YEAR_PUB: YearPubGet.length <= 0 ? 0 : parseInt(YearPubGet),
+      KEYWORDS: KeywordGet,
+      SUBJECTS: SubjectGet,
+      BIB_TYPE: CategoryBibGet.length <= 0 ? 0 : parseInt(CategoryBibGet),
+      Is_Unsigned: UnsignedGet,
+      Title_Exactly: TitleExactlyGet,
+      Author_Exactly: AuthorExactlyGet,
+      Keyword_Exactly: KeywordExactlyGet,
+      Subject_Exactly: SubjectExactlyGet,
+      Yearpub_Exactly: YearPubExactlyGet,
+      OrderBy: orderby
+    }
+    setParaSearch(ModelSearch);
+    ActionCreators.BasicSearch(dispatch, ModelSearch);
+  }
+  else
+  {
+    setorderby(orderby);
+    setpageSize(pageSize);
+    setCurrentPage(page);
+    var ModelSearchQuickSearch =
+    {
+      Page:page,
+      PageSize: pageSize,
+      KeywordSearchFondEnd: KeywordQuickSearch,
+      CateSearchFondEnd: CateSearch,
+      OrderBy: orderby
+    }
+    setParaSearch(ModelSearchQuickSearch);
+    ActionCreators.QuickSearch(dispatch, ModelSearchQuickSearch);
+  }
+}
 
+const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
+    setorderby(orderby);
+    setpageSize(pageSize);
+    setCurrentPage(page);
+    setCateSearch('basicsearch');
     console.log("Title", TitleGet);
     console.log("Un", UnsignedGet);
     console.log("TitleEx", TitleExactlyGet);
@@ -81,14 +168,15 @@ const FromSearch = (props: Props) => {
       Yearpub_Exactly: YearPubExactlyGet,
       OrderBy: orderby
     }
-
+    setParaSearch(ModelSearch);
     ActionCreators.BasicSearch(dispatch, ModelSearch);
-    ActionCreators.BasicSearch_Refind_Keyword(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_BibType(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_Author(dispatch, ModelSearch);
+    ActionCreators.BasicSearch_Refind_Keyword(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_PubYear(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_Subject(dispatch, ModelSearch);
     setcollapseTwoRSBibType("panel-collapse collapse in show");
+    
     console.log("3333333333333333333 lnhai", state);
   }
   const ClientQuickSearch = (page: number , pageSize:number, orderby:string , Keyword:string , CateSearch: string ) => {
@@ -98,10 +186,11 @@ const FromSearch = (props: Props) => {
     console.log("TitleEx", TitleExactlyGet);
     console.log("CategoryBibGet", CategoryBibGet);
     console.log("orderbyorderbyorderby", orderby);
-
+    setCateSearch('quicksearch');
     setorderby(orderby);
     setpageSize(pageSize);
     setCurrentPage(page);
+    setKeywordQuickSearch(CateSearch);
     var ModelSearch =
     {
       Page:page,
@@ -110,14 +199,14 @@ const FromSearch = (props: Props) => {
       CateSearchFondEnd: CateSearch,
       OrderBy: orderby
     }
-
+    setParaSearch(ModelSearch);
     ActionCreators.QuickSearch(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_BibType(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_Author(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_Keyword(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_PubYear(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_Subject(dispatch, ModelSearch);
-    
+    setcollapseTwoRSBibType("panel-collapse collapse in show");
     
   }
 
@@ -199,11 +288,14 @@ const FromSearch = (props: Props) => {
   }
 
   const ClientPageNextPrev= ( CurrentPage: number , CatePage: string) => {
-    if (CatePage=="next"){
+    if (CatePage=="next")
+    {
       ClientSearchItem(CurrentPage+1,pageSize,orderby);
+       //ShowMoreRefind(CateSearch,'ID',CurrentPage+1);
     }
     else if (CatePage=='pre'){
-      if (CurrentPage>1){
+      if (CurrentPage>1)
+      {
         ClientSearchItem(CurrentPage-1,pageSize,orderby);
       }
       
@@ -402,7 +494,7 @@ const FromSearch = (props: Props) => {
                         }
                         {
                          state.items_Authors_Search?
-                            <p> <a  onClick={(e) => ShowHideRefindSeach('collapseTwoRSBibType')} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'author',state.items_Authors_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
 
                           :""
                         }
@@ -443,6 +535,12 @@ const FromSearch = (props: Props) => {
                             :""
 
                         }
+                        {
+                         state.items_Pubyear_Search?
+                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'pubyear',state.items_Pubyear_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+
+                          :""
+                        }
                         </div>
                       </div>
                     </div>
@@ -476,6 +574,12 @@ const FromSearch = (props: Props) => {
                             : ""
                             :""
 
+                        }
+                        {
+                         state.items_Keywords_Search?
+                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'keyword',state.items_Keywords_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+
+                          :""
                         }
                         </div>
                       </div>
@@ -511,6 +615,12 @@ const FromSearch = (props: Props) => {
                             : ""
                             :""
 
+                        }
+                        {
+                         state.items_Subject_Search?
+                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'Subject',state.items_Subject_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+
+                          :""
                         }
                         </div>
                       </div>
@@ -888,7 +998,7 @@ const FromSearch = (props: Props) => {
                           <div className="pull-left"><span className="pull-left">Sắp xếp</span>
                             <select name="start" id="cbFilterField" className="form-control pull-left opacselect"
                             // onchange="javascript:ClientFieldSortOnchange('cms', this);"
-                            onChange={e =>  ClientSearchItem(1, 10, e.target.value)}
+                            onChange={e =>  ClientSearchItem_Sort(1, 10, e.target.value)}
                             >
                               <option value="">--- Chọn ---</option>
                               <option selected value="newbib_dsc">Thích hợp</option>
@@ -899,7 +1009,7 @@ const FromSearch = (props: Props) => {
                             <span className="pull-left">Hiển thị: </span>
                             <select name="start" style={{ width: '20%' }} id="cbRecordPage" className="form-control pull-left opacselect"
                             // onchange="javascript:ClientRecordPageOnchange('cms', this);"
-                            onChange={e =>  ClientSearchItem(1, parseInt(e.target.value),"ID")}
+                            onChange={e =>  ClientSearchItem_Sort(1, parseInt(e.target.value),"ID")}
                             >
                               <option selected value={10}>10</option>
                               <option value={50}>50</option>
