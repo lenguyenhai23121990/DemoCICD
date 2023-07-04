@@ -34,11 +34,11 @@ const FromSearch = (props: Props) => {
   const [KeywordQuickSearchGet, setKeywordQuickSearchGet] = React.useState("");
   const [CategoryBibGet, setCategoryBibGet] = React.useState("");
   const [CurrentPage, setCurrentPage] = React.useState(0);
-  const [collapseTwoRSBibType, setcollapseTwoRSBibType] = React.useState("panel-collapse collapse  in show ");
-  const [collapseTwoRSKeyword, setcollapseTwoRSKeyword] = React.useState("panel-collapse collapse  in show ");
-  const [collapseTwoRSAuthor, setcollapseTwoRSAuthor] = React.useState("panel-collapse collapse  in show ");
-  const [collapseTwoRSPubyear, setcollapseTwoRSPubyear] = React.useState("panel-collapse collapse  in show ");
-  const [collapseTwoRSSubject, setcollapseTwoRSSubject] = React.useState("panel-collapse collapse  in show ");
+  const [collapseTwoRSBibType, setcollapseTwoRSBibType] = React.useState("panel-collapse collapse ");
+  const [collapseTwoRSKeyword, setcollapseTwoRSKeyword] = React.useState("panel-collapse collapse   ");
+  const [collapseTwoRSAuthor, setcollapseTwoRSAuthor] = React.useState("panel-collapse collapse   ");
+  const [collapseTwoRSPubyear, setcollapseTwoRSPubyear] = React.useState("panel-collapse collapse   ");
+  const [collapseTwoRSSubject, setcollapseTwoRSSubject] = React.useState("panel-collapse collapse  ");
   
 
   const [orderby, setorderby] = React.useState("ID");
@@ -84,10 +84,11 @@ const FromSearch = (props: Props) => {
 
     ActionCreators.BasicSearch(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_Keyword(dispatch, ModelSearch);
-    // ActionCreators.BasicSearch_Refind_BibType(dispatch, ModelSearch);
-    // ActionCreators.BasicSearch_Refind_Author(dispatch, ModelSearch);
-    // ActionCreators.BasicSearch_Refind_PubYear(dispatch, ModelSearch);
-    // ActionCreators.BasicSearch_Refind_Subject(dispatch, ModelSearch);
+    ActionCreators.BasicSearch_Refind_BibType(dispatch, ModelSearch);
+    ActionCreators.BasicSearch_Refind_Author(dispatch, ModelSearch);
+    ActionCreators.BasicSearch_Refind_PubYear(dispatch, ModelSearch);
+    ActionCreators.BasicSearch_Refind_Subject(dispatch, ModelSearch);
+    setcollapseTwoRSBibType("panel-collapse collapse in show");
     console.log("3333333333333333333 lnhai", state);
   }
   const ClientQuickSearch = (page: number , pageSize:number, orderby:string , Keyword:string , CateSearch: string ) => {
@@ -357,7 +358,7 @@ const FromSearch = (props: Props) => {
                               )
                             })
                             : ""
-                            :""
+                            :  ""
 
                         }
                        
@@ -390,6 +391,8 @@ const FromSearch = (props: Props) => {
                                       <label className="form-check-label" htmlFor="chkrs_rsauthor_0">{item.VALUE}</label>  
                                       <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
                                     </p>
+
+                                    
                                 </>
                               )
                             })
@@ -397,7 +400,12 @@ const FromSearch = (props: Props) => {
                             :""
 
                         }
-                         
+                        {
+                         state.items_Authors_Search?
+                            <p> <a  onClick={(e) => ShowHideRefindSeach('collapseTwoRSBibType')} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+
+                          :""
+                        }
 
                         </div>
                       </div>
