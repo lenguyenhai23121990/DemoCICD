@@ -110,7 +110,7 @@ const CategoryAudio = (props: Props) => {
                   state.item_ListVideoByCategoryID.Results.map((item: any, index: number) => {
                     return (
                       <>
-                        <div id="divCategoryNews" className="col-sm-3 col-12">
+                        <div id="divCategoryNews" className="col-sm-3 col-12"> 
                           <div className="card mb-4 shadow-sm"> 
                             <a href={"../DetailVideo/"+item.Title_Format_Url +'/'+item.Id }><img alt="" className="card-img-top" style={{ height: '170px', width: '100%', display: 'block' }} src={ENV.URL_Nginx+item.Avatar} /></a>
                             <div className="card-title">
