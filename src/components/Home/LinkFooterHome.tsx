@@ -23,7 +23,7 @@ const LinkFooterHome = (props: Props) => {
                 <div id="collapseOne" className="collapse show container">
                     <div className="col-md-3 left">
                         <ul >
-                            <li className="liTitleGroup"><a className="black" href="../cms/homecollection-bo-suu-tap-id-.html"><b>Bộ sưu tập</b></a></li>
+                            <li className="liTitleGroup"><a className="black" href="../cms/homecollection-bo-suu-tap-id-.html"><b>Bộ sưu tập123</b></a></li>
                             <li ><a className="black" href="http://10.161.10.104:8886/pages/cms/collection-hoi-thao--ky-yeu--tai-lieu-id-106.html">Hội thảo, kỷ yếu, tài liệu</a></li>
                             <li ><a className="black" href="http://10.161.10.104:8886/pages/cms/collection-tap-chi-trong-nuoc-id-7.html">Tạp chí trong nước</a></li>
                             <li ><a className="black" href="http://10.161.10.104:8886/pages/cms/collection-tap-chi-nuoc-ngoai-id-8.html">Tạp chí nước ngoài</a></li>

@@ -15,7 +15,7 @@ const CollectionImage = (props: Props) => {
             <input type="hidden" id="hdSelectedNode" defaultValue="collection$3874$0$0|" /> 
             <input type="hidden" id="hdKeyWord" defaultValue="collection$3874$0$0|" /> 
             <div id="accordion" className="col-md-3 col-12">
-                        <h5 className="articleTitle">BỘ SƯU TẬP</h5>
+                        <h5 className="articleTitle">BỘ SƯU TẬP123</h5>
                         <div id="divGroupCollection" className="overflow-auto">
                             <p>
                                 <span data-role="checkbox">
