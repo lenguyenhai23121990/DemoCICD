@@ -5,22 +5,24 @@ const screen = (state = "HOME", action: any = {}) => screens[action.type] || sta
 export default screen
 const screens: any = {
   [NOT_FOUND]: "NotFound",
-  "signin-oidc": "signin-oidc",
+  "signin-oidc": "contenthome/ContentHome",
   "home": ENV.HOME_PATH,
   "login": 'login/Login',
   "contenthome/ContentHome": "contenthome/ContentHome",
   "contentdetail/FromCategoryNews": "contentdetail/FromCategoryNews",
+  "contentdetail/FromCategoryAudio": "contentdetail/FromCategoryAudio",
+  "contentdetail/FromCategoryVideo": "contentdetail/FromCategoryVideo",
+  "contentdetail/FromCategoryImage": "contentdetail/FromCategoryImage",
+  "contentdetail/FormDetailVideo": "contentdetail/FormDetailVideo",
+  "contentdetail/FormDetailImage": "contentdetail/FormDetailImage ",
   "contentdetail/FormCollectionCategory": "contentdetail/FormCollectionCategory",
   "contentdetail/FormCollectionHome": "contentdetail/FormCollectionHome",
   "contentdetail/FormDetailBook": "contentdetail/FormDetailBook",
   "contentdetail/FromDetailNews": "contentdetail/FromDetailNews",
   "contentdetail/search/FromSearch": "contentdetail/search/FromSearch",
+  "contentdetail/search/FromSearchParam": "contentdetail/search/FromSearch",
   
-  // "service1/master": "service1/master/List",
-  // "service1/detail": "service1/detail/List",
-  // "service2/master": "service2/master/List",
-  // "service2/detail": "service2/detail/List",
-  // "service2/readers": "service2/readers/List",
+
 };
 
 // NOTES: this is the primary reducer demonstrating how RFR replaces the need

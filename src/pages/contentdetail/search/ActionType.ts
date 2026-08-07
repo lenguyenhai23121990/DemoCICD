@@ -10,6 +10,9 @@ export const ActionType = {
     PubyearBasicSearch: "PubyearBasicSearch",
     PubyearQuickSearch: "PubyearQuickSearch",
     SubjectBasicSearch: "SubjectBasicSearch",
-    SubjectQuickSearch: "SubjectQuickSearch"
-    
+    SubjectQuickSearch: "SubjectQuickSearch",
+    RefindQuickSearch: "RefindQuickSearch",
+    RefindBasicSearch: "RefindBasicSearch",
+    ReportQuickSearch:"ReportQuickSearch",
+    ReportBasicSearch: "ReportBasicSearch"
 };

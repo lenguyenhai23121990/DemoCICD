@@ -61,6 +61,7 @@ export const ActionCreators = {
         console.log(getState())
         localStorage.removeItem("user")
         indexedDB.deleteDatabase("Demo")
+        
         UMSService.signIn({
             userName: user,
             password: password,
@@ -69,8 +70,18 @@ export const ActionCreators = {
           })
           .then(async (response) => {
             try {
-              let user = response?.data
-              localStorage.setItem("user", JSON.stringify(user));
+               console.log("response?.dataresponse?.dataresponse?.data");
+              // if (response?.data){
+                let user = response?.data
+                localStorage.setItem("user", JSON.stringify(user));
+
+                console.log("11111111111122222", localStorage.getItem("user"));
+
+              // }
+              // else{
+              // localStorage.setItem("user", "");
+              // }
+              
               dispatch({
                 type: "home",
               });

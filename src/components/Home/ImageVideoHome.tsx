@@ -15,18 +15,18 @@ const ImageVideoHome = (props: Props) => {
             <div className="col-sm-12" id="maincollLoading2"><section className="homeTopBlock">
                 <div className="row">
                     <div className="col-md-6 col-12">
-                        <h3 className="header1"><a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-3874.html">Ảnh</a><hr id="hrcolor" /></h3>
+                        <h3 className="header1"><a href="../CategoryImage/Anh-them20/38">Ảnh</a><hr id="hrcolor" /></h3>
                         <div className="divImageLeft">
                             <div id="divImager" className="sideWrapIn">
-                                <a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-3874.html"> <img src={HomeModulImage} /> </a>
+                                <a href="../CategoryImage/Anh-them20/38"> <img src={HomeModulImage} /> </a>
                             </div>
                         </div>
                     </div>
                     <div className="col-md-6 col-12 divVideoRight">
-                        <h3 className="header1"><a href="http://10.161.10.104:8886/pages/cms/collection-hinh-anh-video-id-5287.html">Video</a><hr id="hrcolor" /></h3>
+                        <h3 className="header1"><a href="../CategoryVideo/Video-trong-nuoc/4">Video</a><hr id="hrcolor" /></h3>
                         <div className="divVideoRight">
                             <div id="divVideoIntroductBook" className="sideWrapIn">
-                                <a href="/pages/cms/collection-hinh-anh-video-id-5287.html"><img src={HomeModulVideo} /> </a>
+                                <a href="../CategoryVideo/Video-trong-nuoc/4"><img src={HomeModulVideo} /> </a>
                             </div>
                         </div>
                     </div>

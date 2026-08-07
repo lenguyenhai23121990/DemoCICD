@@ -112,6 +112,7 @@ const Login = (props: Props) => {
 }
 
 const mapStateToProps = (state: ApplicationState) => {
+    
     return {
         config: state.ConfigState,
         isAuthenticated: localStorage.getItem("user") !== undefined,

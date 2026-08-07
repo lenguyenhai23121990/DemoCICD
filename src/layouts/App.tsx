@@ -1,24 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { classNames } from 'primereact/utils';
 // import { Route, Routes, useLocation } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo_header from '../assets/Image/logo_header.png';
-import mdi_phone from '../assets/Image/mdi_phone.png';
-import '../assets/CSS/newLayOutcms.css'
-import '../assets/CSS/stylesheet.scss'
-import '../assets/CSS/all.css'
-import '../assets/CSS/font-awesome.min.css'
-import Carousel from 'react-bootstrap/Carousel';
+
 //------------Home------------------------
-import BannerHeader from '../components/Home/BannerHeader'
-import BookNewHome from '../components/Home/BookNewHome'
+import BannerHeader from '../components/Home/Banner/BannerHeader'
+import BookNewHome from '../components/Home/BookNew/BookNewHome'
 import CollectionHome from '../components/Home/CollectionHome'
 import FooterHome from '../components/Home/FooterHome'
 import ImageVideoHome from '../components/Home/ImageVideoHome'
 import InfomationHome from '../components/Home/InfomationHome'
 import LinkFooterHome from '../components/Home/LinkFooterHome'
-import MenuTop from '../components/Home/MenuTop'
-import NewsHome from '../components/Home/NewsHome'
+import MenuTop from '../components/Home/Menu/MenuTop'
+import NewsHome from '../components/Home/NewHome/NewsHome'
 import NewsPaperHome from '../components/Home/NewsPaperHome'
 import TopHeader from '../components/Home/TopHeader'
 import FormSearch from '../components/Search/FromSearch'
@@ -43,7 +36,14 @@ import AppRightMenu from './AppRightMenu';
 import 'typeface-roboto';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo_header from '../assets/Image/logo_header.png';
+import mdi_phone from '../assets/Image/mdi_phone.png';
+import '../assets/CSS/newLayOutcms.css'
+import '../assets/CSS/stylesheet.scss'
+import '../assets/CSS/all.css'
+import '../assets/CSS/font-awesome.min.css'
+import Carousel from 'react-bootstrap/Carousel';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
@@ -95,7 +95,8 @@ const App = (props: Props) => {
     let currentInlineMenuKey = useRef('');
     const copyTooltipRef = useRef<any>();
     // const location = useLocation();
-
+    const [titleUrl, settitleUrl] = useState(null);
+    
     PrimeReact.ripple = true;
 
     let searchClick: boolean;
@@ -448,25 +449,7 @@ const App = (props: Props) => {
              
             <LinkFooterHome></LinkFooterHome>
             <FooterHome ></FooterHome>
-           
-           
-             
-            
-             
-             
-             
-            
-             
-
-
-
-            
-
-            
-            
-
-            
-
+   
         </RTLContext.Provider>)
 
     );
@@ -474,6 +457,7 @@ const App = (props: Props) => {
 
 const mapStateToProps = (state: ApplicationState) => {
     return {
+        
         user: getUser(),
         isAuthenticated: getUser().AccessToken !== undefined,
     }

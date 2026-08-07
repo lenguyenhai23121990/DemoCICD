@@ -8,6 +8,7 @@ import OAuthorsService from "./OAuthorsService"
 import OKeywordsService from "./OKeywordsService"
 import OPubyearService from "./OPubyearService"
 import OSubjectService from "./OSubjectService"
+import CMSService from "./CMSService"
 
 
 const ENV = window._env_
@@ -22,7 +23,8 @@ export {
     OAuthorsService,
     OKeywordsService,
     OPubyearService,
-    OSubjectService
+    OSubjectService,
+    CMSService
 }
 
 export const Logger = {

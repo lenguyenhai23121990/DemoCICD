@@ -1,7 +1,7 @@
 import React from "react"
 import InfomationHome from '../../components/Home/InfomationHome'
-import ComponentsCategoryNews from '../../components/News/CategoryNews'
-import BannerDetail from '../../components/DetailBook/BannerDetail'
+import ComponentsCategoryNews from '../../components/News/CategoryNews/CategoryNews'
+import BannerDetail from '../../components/BannerDetail/BannerDetail'
 
 interface State {
 

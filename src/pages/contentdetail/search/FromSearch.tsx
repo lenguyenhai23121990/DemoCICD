@@ -1,14 +1,17 @@
-import React, { useReducer, useState } from "react"
+import React, { useReducer, useState,useEffect } from "react"
 import InfomationHome from '../../../components/Home/InfomationHome'
 import ComponentsModuleSearch from '../../../components/Search/FromSearch'
-import BannerDetail from '../../../components/DetailBook/BannerDetail'
+import BannerDetail from '../../../components/BannerDetail/BannerDetail'
 import ComponentsModuleResultSearch from '../../../components/Search/FromResultSearch'
 import { initState, initValues } from './InitState';
 import { ActionCreators, reducer } from './Reducer';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import XemChiTiet from "../../../assets/Image/XemChiTiet.png"
+import ENV from "services";
+// import  titleUrl_SiteApp  from '../../../../src/layouts/App';
 import { any } from "prop-types"
+import { start } from "repl"
 // import SearchModel from './Model';
 interface State {
 
@@ -40,15 +43,26 @@ const FromSearch = (props: Props) => {
   const [collapseTwoRSAuthor, setcollapseTwoRSAuthor] = React.useState("panel-collapse collapse   ");
   const [collapseTwoRSPubyear, setcollapseTwoRSPubyear] = React.useState("panel-collapse collapse   ");
   const [collapseTwoRSSubject, setcollapseTwoRSSubject] = React.useState("panel-collapse collapse  ");
-  
+
   const [CateSearch, setCateSearch] = React.useState("");
   const [ParaSearch, setParaSearch] = React.useState<any>();
   const [KeywordQuickSearch, setKeywordQuickSearch] = React.useState("");
-
   const [orderby, setorderby] = React.useState("ID");
   const [pageSize, setpageSize] = React.useState(10);
+  const [CheckAll, setCheckAll] = React.useState(false);
+  const [ListIDChecked, setListIDChecked] = React.useState("");
+  // const [ParaSearchRefind, setParaSearchRefind] = React.useState<any>();
+
+  const [ValueRefindBibType, setValueRefindBibType] = React.useState("");
+  const [ValueRefindKeyword, setValueRefindKeyword] = React.useState("");
+  const [ValueRefindAuthor, setValueRefindAuthor] = React.useState("");
+  const [ValueRefindPubyear, setValueRefindPubyear] = React.useState("");
+  const [ValueRefindSubject, setValueRefindSubject] = React.useState("");
+
+  const [KeywordUrl, setKeywordUrl] = React.useState("");
+  const [CateSearchUrl, setCateSearchUrl] = React.useState("");
   //const [MaxpageCount, setMaxpageCount] = React.useState(0);
-  
+
   // const MethodParent = (KeywordGet: any, CategoryBibGet: any) => {
 
   //   console.log("KeywordKeywordKeywordKeyword" + KeywordGet);
@@ -58,89 +72,154 @@ const FromSearch = (props: Props) => {
   //   ActionCreators.QuickSearch(dispatch, KeywordGet, CategoryBibGet);
   // }
   //CateSearch,CateRefind,state.items_Authors_Search.CurrentPage+1
-const ShowMoreRefind =(CateSearch:string, CateRefind:string ,page:number)=>{
-    var ipageSize=page*10;
-  if(CateSearch=='basicsearch'){
-    ParaSearch.ipageSize =page;
-    if(CateRefind=='author')
-    {
-      console.log("1111111111",page);
-      ActionCreators.BasicSearch_Refind_Author(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='pubyear'){
-      ActionCreators.BasicSearch_Refind_PubYear(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='keyword'){
-      ActionCreators.BasicSearch_Refind_Keyword(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='Subject'){
-      ActionCreators.BasicSearch_Refind_Subject(dispatch, ParaSearch);
-    }
-  }
-  else {
-    ParaSearch.page =page;
 
-    if(CateRefind=='author')
-    {
-      ActionCreators.QuickSearch_Refind_Author(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='pubyear'){
-      ActionCreators.QuickSearch_Refind_PubYear(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='keyword'){
-      ActionCreators.QuickSearch_Refind_Keyword(dispatch, ParaSearch);
-    }
-    else if(CateRefind=='Subject'){
-      ActionCreators.QuickSearch_Refind_Subject(dispatch, ParaSearch);
-    }
-  }
-}
 
-const ClientSearchItem_Sort = (page: number , pageSize:number, orderby:string ) => {
-  if (CateSearch=='basicsearch'){
-    setorderby(orderby);
-    setpageSize(pageSize);
-    setCurrentPage(page);
-    var ModelSearch =
-    {
-      Page:page,
-      PageSize: pageSize,
-      TITLE: TitleGet,
-      AUTHOR: AuthorGet,
-      YEAR_PUB: YearPubGet.length <= 0 ? 0 : parseInt(YearPubGet),
-      KEYWORDS: KeywordGet,
-      SUBJECTS: SubjectGet,
-      BIB_TYPE: CategoryBibGet.length <= 0 ? 0 : parseInt(CategoryBibGet),
-      Is_Unsigned: UnsignedGet,
-      Title_Exactly: TitleExactlyGet,
-      Author_Exactly: AuthorExactlyGet,
-      Keyword_Exactly: KeywordExactlyGet,
-      Subject_Exactly: SubjectExactlyGet,
-      Yearpub_Exactly: YearPubExactlyGet,
-      OrderBy: orderby
+  useEffect(() => {
+    let cateSearch = window.location.href.split('/')[window.location.href.split('/').length-1]
+    if(cateSearch==undefined){
+      cateSearch="";
     }
-    setParaSearch(ModelSearch);
-    ActionCreators.BasicSearch(dispatch, ModelSearch);
-  }
-  else
-  {
-    setorderby(orderby);
-    setpageSize(pageSize);
-    setCurrentPage(page);
-    var ModelSearchQuickSearch =
-    {
-      Page:page,
-      PageSize: pageSize,
-      KeywordSearchFondEnd: KeywordQuickSearch,
-      CateSearchFondEnd: CateSearch,
-      OrderBy: orderby
-    }
-    setParaSearch(ModelSearchQuickSearch);
-    ActionCreators.QuickSearch(dispatch, ModelSearchQuickSearch);
-  }
-}
+    let Keyword = window.location.href.split('/')[window.location.href.split('/').length-2]
 
-const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
+    console.log("KeywordKeywordKeyword",decodeURIComponent(Keyword));
+
+    //console.log("cateSearch",cateSearch);
+    if (window.location.href.split('/').length ==6){
+      if (decodeURIComponent(Keyword).length>0){
+        ClientQuickSearch(1, 10, "ID", decodeURIComponent(Keyword), cateSearch)
+        setKeywordUrl( decodeURIComponent(Keyword));
+        setCateSearchUrl(cateSearch);
+  
+      }
+    }
+   
+    // let iID =0;
+    // try
+    // {
+    //   iID = Number(ID);
+    // }catch{}
+    // ActionCreators.SearchByID(dispatch, iID);
+  }, [])
+  
+  const ShowMoreRefind = (CateSearch: string, CateRefind: string, LastRowOnPage: number) => {
+    if (CateSearch == 'basicsearch') {
+      ParaSearch.PageSize = LastRowOnPage;
+      if (CateRefind == 'author') {
+        ActionCreators.BasicSearch_Refind_Author(dispatch, ParaSearch);
+        
+        DrawRefind('author')
+      }
+      else if (CateRefind == 'pubyear') {
+        ActionCreators.BasicSearch_Refind_PubYear(dispatch, ParaSearch);
+        DrawRefind('pubyear')
+      }
+      else if (CateRefind == 'keyword') {
+        ActionCreators.BasicSearch_Refind_Keyword(dispatch, ParaSearch);
+        DrawRefind('keyword')
+      }
+      else if (CateRefind == 'Subject') {
+        ActionCreators.BasicSearch_Refind_Subject(dispatch, ParaSearch);
+        DrawRefind('Subject')
+        console.log("state.items_Subject_Search",state.items_Subject_Search);
+      }
+    }
+    else {
+      ParaSearch.PageSize = LastRowOnPage;
+
+      if (CateRefind == 'author') {
+        ActionCreators.QuickSearch_Refind_Author(dispatch, ParaSearch);
+        DrawRefind('author')
+      }
+      else if (CateRefind == 'pubyear') {
+        ActionCreators.QuickSearch_Refind_PubYear(dispatch, ParaSearch);
+        DrawRefind('pubyear')
+      }
+      else if (CateRefind == 'keyword') {
+        ActionCreators.QuickSearch_Refind_Keyword(dispatch, ParaSearch);
+        DrawRefind('keyword')
+      }
+      else if (CateRefind == 'Subject') {
+        ActionCreators.QuickSearch_Refind_Subject(dispatch, ParaSearch);
+        DrawRefind('Subject')
+      }
+    }
+
+  }
+  
+  const ClientCheckAll = (Checked: any) => {
+    var chks = document.querySelectorAll("#divIDDetailBibiSearch input[type='checkbox']");
+    console.log("chkschkschks",chks);
+    if(chks.length>0){
+      for(let i=0; i<chks.length;i++){
+        console.log("99999",chks[i].id);
+        if (CheckAll==false){
+          document.getElementById(chks[i].id)?.setAttribute('checked', 'checked');
+        }
+        else{
+          document.getElementById(chks[i].id)?.removeAttribute('checked');
+        }
+      }
+    }
+
+    if (Checked.checked){
+      setCheckAll(true);
+      setListIDChecked("");
+    }
+    else{
+      setCheckAll(false);
+      setListIDChecked("");
+    }
+    //
+  }
+  const ClientCheckBib = (Checked: any) => {
+
+    console.log("Checkbib", Checked.checked);
+    if (Checked.checked){
+      setListIDChecked (ListIDChecked+ Checked.value+";")
+    }
+    else{
+      setListIDChecked (ListIDChecked.replace(Checked.value+";",''));
+    }
+    
+    // if (Checked.checked){
+    //   setCheckAll(true);
+    // }
+    // else{
+    //   setCheckAll(false);
+    // }
+    
+  }
+  
+  const ClientSearchItem_Sort_Paging = (page: number, pageSize: number, orderby: string) => {
+    if (CateSearch == 'basicsearch') {
+      setorderby(orderby);
+      setpageSize(pageSize);
+      setCurrentPage(page);
+      
+
+      ParaSearch.Page = page;
+      ParaSearch.PageSize = pageSize;
+      ParaSearch.OrderBy = orderby;
+      setParaSearch(ParaSearch);
+      //setParaSearchRefind(ModelSearchRefind);
+      ActionCreators.BasicSearch(dispatch, ParaSearch);
+    }
+    else {
+      setorderby(orderby);
+      setpageSize(pageSize);
+      setCurrentPage(page);
+
+
+      ParaSearch.Page = page;
+      ParaSearch.PageSize = pageSize;
+      ParaSearch.OrderBy = orderby;
+      setParaSearch(ParaSearch);
+      //setParaSearchRefind(ModelSearchQuickSearchRefind);
+      ActionCreators.QuickSearch(dispatch, ParaSearch);
+    }
+  }
+
+  const ClientSearchItem = (page: number, pageSize: number, orderby: string) => {
     setorderby(orderby);
     setpageSize(pageSize);
     setCurrentPage(page);
@@ -152,7 +231,7 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
     console.log("orderbyorderbyorderby", orderby);
     var ModelSearch =
     {
-      Page:page,
+      Page: page,
       PageSize: pageSize,
       TITLE: TitleGet,
       AUTHOR: AuthorGet,
@@ -166,9 +245,17 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
       Keyword_Exactly: KeywordExactlyGet,
       Subject_Exactly: SubjectExactlyGet,
       Yearpub_Exactly: YearPubExactlyGet,
-      OrderBy: orderby
+      OrderBy: orderby,
+      Refind_BibType: '',
+      Refind_Author: '',
+      Refind_Keyword: '',
+      Refind_Pubyear: '',
+      Refind_Subject: '',
+      ListIDChecked:''
     }
+    
     setParaSearch(ModelSearch);
+    // setParaSearchRefind(ModelSearchRefind);
     ActionCreators.BasicSearch(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_BibType(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_Author(dispatch, ModelSearch);
@@ -176,10 +263,10 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
     ActionCreators.BasicSearch_Refind_PubYear(dispatch, ModelSearch);
     ActionCreators.BasicSearch_Refind_Subject(dispatch, ModelSearch);
     setcollapseTwoRSBibType("panel-collapse collapse in show");
-    
+
     console.log("3333333333333333333 lnhai", state);
   }
-  const ClientQuickSearch = (page: number , pageSize:number, orderby:string , Keyword:string , CateSearch: string ) => {
+  const ClientQuickSearch = (page: number, pageSize: number, orderby: string, Keyword: string, CateSearch: string) => {
 
     console.log("Title", TitleGet);
     console.log("Un", UnsignedGet);
@@ -193,13 +280,33 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
     setKeywordQuickSearch(CateSearch);
     var ModelSearch =
     {
-      Page:page,
+      Page: page,
       PageSize: pageSize,
       KeywordSearchFondEnd: Keyword,
       CateSearchFondEnd: CateSearch,
-      OrderBy: orderby
+      OrderBy: orderby,
+      Refind_BibType: '',
+      Refind_Author: '',
+      Refind_Keyword: '',
+      Refind_Pubyear: '',
+      Refind_Subject: '',
+      ListIDChecked:''
     }
+    // var ModelSearchRefind =
+    // {
+    //   Page:page,
+    //   PageSize: pageSize,
+    //   KeywordSearchFondEnd: Keyword,
+    //   CateSearchFondEnd: CateSearch,
+    //   OrderBy: orderby,
+    //   Refind_BibType:'',
+    //   Refind_Author:'',
+    //   Refind_Keyword:'',
+    //   Refind_Pubyear:'',
+    //   Refind_Subject:''
+    // }
     setParaSearch(ModelSearch);
+    //setParaSearchRefind(ModelSearchRefind);
     ActionCreators.QuickSearch(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_BibType(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_Author(dispatch, ModelSearch);
@@ -207,72 +314,270 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
     ActionCreators.QuickSearch_Refind_PubYear(dispatch, ModelSearch);
     ActionCreators.QuickSearch_Refind_Subject(dispatch, ModelSearch);
     setcollapseTwoRSBibType("panel-collapse collapse in show");
-    
+
   }
 
   const handleChangeUnsigned = (event: any) => {
     setUnsignedGet(event.target.checked);
   }
-  const ShowHideRefindSeach=(CateRefindSearch:string) =>{
+  const ClientReloadDataByRefind = (CateRefindSearch: string, objvalue: any) => {
+
+    var Value = objvalue.value;
+    switch (CateRefindSearch) {
+      case 'BibType':
+
+        if (ValueRefindBibType.length > 0) {
+          if (objvalue.checked == true) {
+            Value = ValueRefindBibType + Value + ';';
+            setValueRefindBibType(Value);
+
+          }
+          else {
+            console.log("replace111", ValueRefindBibType.replace(Value + ';', ""))
+            Value = ValueRefindBibType.replace(Value + ';', "");
+            setValueRefindBibType(Value);
+          }
+
+        }
+        else {
+
+          if (objvalue.checked == true) {
+            Value = ValueRefindBibType + Value + ';';
+            setValueRefindBibType(Value);
+
+          }
+          else {
+            Value = ValueRefindBibType.replace(Value + ';', "");
+            setValueRefindBibType(Value);
+
+          }
+
+        }
+        console.log("ValueRefindBibTypeValueRefindBibType", Value);
+        ParaSearch.Refind_BibType = Value;
+        if (CateSearch == 'quicksearch') {
+          ActionCreators.QuickSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        else {
+          ActionCreators.BasicSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+
+        return '';
+      case 'Subject':
+        if (ValueRefindSubject.length > 0) {
+          if (objvalue.checked == true) {
+            Value = ValueRefindSubject + Value + ';';
+            setValueRefindSubject(Value);
+
+          }
+          else {
+            console.log("replace111", ValueRefindSubject.replace(Value + ';', ""))
+            Value = ValueRefindSubject.replace(Value + ';', "");
+            setValueRefindSubject(Value);
+          }
+
+        }
+        else {
+
+          if (objvalue.checked == true) {
+            Value = ValueRefindSubject + Value + ';';
+            setValueRefindSubject(Value);
+
+          }
+          else {
+            Value = ValueRefindSubject.replace(Value + ';', "");
+            setValueRefindSubject(Value);
+
+          }
+
+        }
+        ParaSearch.Refind_Subject = Value;
+        if (CateSearch == 'quicksearch') {
+          ActionCreators.QuickSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        else {
+          ActionCreators.BasicSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        return '';
+      case 'Keyword':
+        if (ValueRefindKeyword.length > 0) {
+          if (objvalue.checked == true) {
+            Value = ValueRefindKeyword + Value + ';';
+            setValueRefindKeyword(Value);
+
+          }
+          else {
+            console.log("replace111", ValueRefindKeyword.replace(Value + ';', ""))
+            Value = ValueRefindKeyword.replace(Value + ';', "");
+            setValueRefindKeyword(Value);
+          }
+
+        }
+        else {
+
+          if (objvalue.checked == true) {
+            Value = ValueRefindKeyword + Value + ';';
+            setValueRefindKeyword(Value);
+
+          }
+          else {
+            Value = ValueRefindKeyword.replace(Value + ';', "");
+            setValueRefindKeyword(Value);
+
+          }
+
+        }
+
+        ParaSearch.Refind_Keyword = Value;
+        if (CateSearch == 'quicksearch') {
+          ActionCreators.QuickSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        else {
+          ActionCreators.BasicSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        return '';
+      case 'Pubyear':
+        if (ValueRefindPubyear.length > 0) {
+          if (objvalue.checked == true) {
+            Value = ValueRefindPubyear + Value + ';';
+            setValueRefindPubyear(Value);
+
+          }
+          else {
+            console.log("replace111", ValueRefindPubyear.replace(Value + ';', ""))
+            Value = ValueRefindPubyear.replace(Value + ';', "");
+            setValueRefindPubyear(Value);
+          }
+
+        }
+        else {
+
+          if (objvalue.checked == true) {
+            Value = ValueRefindPubyear + Value + ';';
+            setValueRefindPubyear(Value);
+
+          }
+          else {
+            Value = ValueRefindPubyear.replace(Value + ';', "");
+            setValueRefindPubyear(Value);
+
+          }
+
+        }
+
+        ParaSearch.Refind_Pubyear = Value;
+        if (CateSearch == 'quicksearch') {
+          ActionCreators.QuickSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        else {
+          ActionCreators.BasicSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        return '';
+      case 'Author':
+        if (ValueRefindAuthor.length > 0) {
+          if (objvalue.checked == true) {
+            Value = ValueRefindAuthor + Value + ';';
+            setValueRefindAuthor(Value);
+
+          }
+          else {
+            console.log("replace111", ValueRefindAuthor.replace(Value + ';', ""))
+            Value = ValueRefindAuthor.replace(Value + ';', "");
+            setValueRefindAuthor(Value);
+          }
+
+        }
+        else {
+
+          if (objvalue.checked == true) {
+            Value = ValueRefindAuthor + Value + ';';
+            setValueRefindAuthor(Value);
+
+          }
+          else {
+            Value = ValueRefindAuthor.replace(Value + ';', "");
+            setValueRefindAuthor(Value);
+
+          }
+
+        }
+
+        ParaSearch.Refind_Author = Value;
+        if (CateSearch == 'quicksearch') {
+          ActionCreators.QuickSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        else {
+          ActionCreators.BasicSearch(dispatch, ParaSearch);
+          setParaSearch(ParaSearch);
+        }
+        return '';
+
+    }
+  }
+
+  const ShowHideRefindSeach = (CateRefindSearch: string) => {
     //collapseTwoRSBibType
     var attribute = document.getElementById(CateRefindSearch);
-    if (attribute){
+    if (attribute) {
       let exampleAttr = attribute.getAttribute("class");
-      let IndexShow =exampleAttr?.indexOf("show");
-      if (IndexShow)
-      {
-       
-        switch(CateRefindSearch){
+      let IndexShow = exampleAttr?.indexOf("show");
+      if (IndexShow) {
+
+        switch (CateRefindSearch) {
           case 'collapseTwoRSBibType':
-            if (IndexShow>0){
+            if (IndexShow > 0) {
               setcollapseTwoRSBibType("panel-collapse in collapse ");
             }
-            else
-            {
+            else {
               setcollapseTwoRSBibType("panel-collapse collapse  in show ");
             }
             return '';
           case 'collapseTwoRSSubject':
-            if (IndexShow>0){
-            
+            if (IndexShow > 0) {
+
               setcollapseTwoRSSubject("panel-collapse in collapse ");
             }
-            else
-            {
-     
+            else {
+
               setcollapseTwoRSSubject("panel-collapse collapse  in show ");
             }
             return '';
           case 'collapseTwoRSKeyword':
-            if (IndexShow>0){
+            if (IndexShow > 0) {
 
               setcollapseTwoRSKeyword("panel-collapse in collapse ");
             }
-            else
-            {
+            else {
 
               setcollapseTwoRSKeyword("panel-collapse collapse  in show ");
             }
             return '';
           case 'collapseTwoRSYear':
-            if (IndexShow>0){
+            if (IndexShow > 0) {
               setcollapseTwoRSPubyear("panel-collapse in collapse ");
             }
-            else
-            {
+            else {
               setcollapseTwoRSPubyear("panel-collapse collapse  in show ");
             }
             return '';
           case 'collapseTwoRSAuthor':
-            if (IndexShow>0){
+            if (IndexShow > 0) {
               setcollapseTwoRSAuthor("panel-collapse in collapse ");
             }
-            else
-            {
+            else {
               setcollapseTwoRSAuthor("panel-collapse collapse  in show ");
             }
             return '';
-          
+
         }
         // if (IndexShow>0){
         //   setcollapseTwoRSBibType("panel-collapse in collapse ");
@@ -283,108 +588,264 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
         // }
       }
     }
-      
+
 
   }
+   function urltoFile(url:string, filename:string, mimeType:string) {
+    return (fetch(url)
+      .then(function (res) {
+        // console.log(res); 
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        // console.log(buf); 
+        return new File([buf], filename, { type: mimeType });
+      })
+    );
+  }
+  const ClientExportBib=() => {
 
-  const ClientPageNextPrev= ( CurrentPage: number , CatePage: string) => {
-    if (CatePage=="next")
-    {
-      ClientSearchItem(CurrentPage+1,pageSize,orderby);
-       //ShowMoreRefind(CateSearch,'ID',CurrentPage+1);
+    //ActionCreators.BasicSearch(dispatch, ParaSearch);
+    ParaSearch.ListIDChecked = ListIDChecked;
+    if (CateSearch == 'basicsearch') {
+      ActionCreators.ReportBasicSearch(dispatch, ParaSearch);
     }
-    else if (CatePage=='pre'){
-      if (CurrentPage>1)
-      {
-        ClientSearchItem(CurrentPage-1,pageSize,orderby);
-      }
-      
-    }else if (CatePage=='top')
-    {
-      ClientSearchItem(1,pageSize,orderby);
-    }
-    else
-    {
-      //end
-      ClientSearchItem(state.item.PageCount,pageSize,orderby);
+    else {
+      ActionCreators.ReportQuickSearch(dispatch, ParaSearch);
     }
     
+
+      console.log("itemReport11111111111", state.itemReport );
+      if(state.itemReport==undefined){
+        setTimeout(() => { var x=0}, 2000);
+      }
+      if(state.itemReport==undefined){
+        setTimeout(() => { var x=0}, 2000);
+      }
+
+      if (state.itemReport.Data){
+
+        let url = 'data:' + state.itemReport.Data.ContentType + ';base64,' + state.itemReport.Data.FileContents;
+        console.log("urlurlurlurl",url);
+        urltoFile(url, state.itemReport.Data.FileDownloadName, state.itemReport.Data.ContentType)
+            .then(function (file) {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                url = URL.createObjectURL(file);
+                a.href = url;
+                // if (!isView)
+                //     a.download = response?.data.Data?.FileDownloadName;
+                // else
+                    a.target = "_blank"
+                a.click();
+
+                
+                window.URL.revokeObjectURL(url);
+                return;
+            });
+      } 
+    
+    
+    
   }
+  const ClientPageNextPrev = (CurrentPage: number, CatePage: string) => {
+    if (CatePage == "next") {
+      //ClientSearchItem(CurrentPage+1,pageSize,orderby);
+      //ShowMoreRefind(CateSearch,'ID',CurrentPage+1);
+      ClientSearchItem_Sort_Paging(CurrentPage + 1, pageSize, orderby);
+    }
+    else if (CatePage == 'pre') {
+      if (CurrentPage > 1) {
+        // ClientSearchItem(CurrentPage-1,pageSize,orderby);
+        ClientSearchItem_Sort_Paging(CurrentPage + 1, pageSize, orderby);
+      }
+
+    } else if (CatePage == 'top') {
+      // ClientSearchItem(1,pageSize,orderby);
+      ClientSearchItem_Sort_Paging(1, pageSize, orderby);
+    }
+    else {
+      //end
+      //ClientSearchItem(state.item.PageCount,pageSize,orderby);
+      ClientSearchItem_Sort_Paging(state.item.PageCount, pageSize, orderby);
+    }
+
+  }
+  const DrawRefind = (CateRefind: string) => {
+    let html: any = [];
+
+    // state.items_BibType_Search ?
+    //   state.items_BibType_Search.Results ?
+    //     state.items_BibType_Search.Results.map((item: any, index: number) => {
+
+    //       html.push(
+    //         <p>
+    //           <input type="checkbox"
+    //             //onClick={(e) => ShowHideRefindSeach('collapseTwoRSYear')}
+    //             onChange={e => ClientReloadDataByRefind('BibType', e.target)}
+    //             // onclick="javascript:ClientSearchRefineQuickSearch();"
+    //             name="RSBibType" className="form-check-input" id="chkrs_rsbibtype_0" defaultValue={item.VALUE} />
+    //           <label className="form-check-label" htmlFor="chkrs_rsbibtype_0">{item.VALUE}</label>
+    //           <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+    //         </p>
+
+    //       );
+    //     })
+    //     : html.push(<p></p>)
+    //   : html.push(<p></p>)
+    if (CateRefind == 'author') {
+      state.items_Authors_Search ?
+        state.items_Authors_Search.Results ?
+          state.items_Authors_Search.Results.map((item: any, index: number) => {
+            html.push(
+
+
+              <p><input type="checkbox"
+                // onclick="javascript:ClientSearchRefineQuickSearch();"
+                onChange={e => ClientReloadDataByRefind('Author', e.target)}
+                name="RSAuthor" className="form-check-input" id="chkrs_rsauthor_0" defaultValue={item.VALUE} />
+                <label className="form-check-label" htmlFor="chkrs_rsauthor_0">{item.VALUE}</label>
+                <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+              </p>)
+          })
+          : html.push(<p></p>)
+        : html.push(<p></p>)
+    }
+    else if (CateRefind == 'pubyear') {
+
+      state.items_Pubyear_Search ?
+        state.items_Pubyear_Search.Results ?
+          state.items_Pubyear_Search.Results.map((item: any, index: number) => {
+
+            html.push(
+              <p><input type="checkbox"
+                //  onclick="javascript:ClientSearchRefineQuickSearchYear();" 
+                onChange={e => ClientReloadDataByRefind('Pubyear', e.target)}
+                name="RSYear" className="form-check-input" id="chkrs_rsyear_0" defaultValue={item.VALUE} />
+                <label className="form-check-label" htmlFor="chkrs_rsyear_0">{item.VALUE}</label>
+                <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+              </p>
+
+            )
+          })
+          : html.push(<p></p>)
+        : html.push(<p></p>)
+    }
+    else if (CateRefind == 'keyword') {
+
+      state.items_Keywords_Search ?
+        state.items_Keywords_Search.Results ?
+          state.items_Keywords_Search.Results.map((item: any, index: number) => {
+
+            html.push(
+              <p><input type="checkbox"
+                // onclick="javascript:ClientSearchRefineQuickSearch();" 
+                onChange={e => ClientReloadDataByRefind('Keyword', e.target)}
+                name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_0" defaultValue={item.VALUE} />
+                <label className="form-check-label" htmlFor="chkrs_rskeyword_0">{item.VALUE}</label>
+                <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+              </p>
+            )
+          })
+          : html.push(<p></p>)
+        : html.push(<p></p>)
+
+    }
+    else if (CateRefind == 'Subject') {
+
+      state.items_Subject_Search ?
+        state.items_Subject_Search.Results ?
+          state.items_Subject_Search.Results.map((item: any, index: number) => {
+
+            html.push(
+              <p><input type="checkbox"
+                // onclick="javascript:ClientSearchRefineQuickSearch();" 
+                onChange={e => ClientReloadDataByRefind('Subject', e.target)}
+                name="RSSubject" className="form-check-input" id="chkrs_rssubject_0" defaultValue={item.VALUE} />
+                <label className="form-check-label" htmlFor="chkrs_rssubject_0">{item.VALUE}</label>
+                <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+              </p>
+
+            )
+          })
+          : html.push(<p></p>)
+        : html.push(<p></p>)
+    }
+
+    return html;
+  }
+
+ 
   const RenderPaging = (CountPages: any, iCurrentPage: number) => {
     //setCurrentPage(CurrentPage);
-    
-    if (state.item.PageCount>0){
-      let html:any = [];
-      let iPageStart =1;
-      let iPageEnd =10;
-      console.log("CountPagesCountPages",CountPages);
-      console.log("iCurrentPageiCurrentPageiCurrentPage",iCurrentPage);
-  
-      if (iCurrentPage>10){
-  
+
+    if (state.item.PageCount > 0) {
+      let html: any = [];
+      let iPageStart = 1;
+      let iPageEnd = 10;
+      if (iCurrentPage > 10) {
+
       }
-  
-      if (iCurrentPage>9 ){
-        iPageStart=iCurrentPage-5;
-        iPageEnd=iCurrentPage+5;
+
+      if (iCurrentPage > 9) {
+        iPageStart = iCurrentPage - 5;
+        iPageEnd = iCurrentPage + 5;
       }
-      if (iPageEnd>state.item.PageCount){
-        iPageEnd=state.item.PageCount;
+      if (iPageEnd > state.item.PageCount) {
+        iPageEnd = state.item.PageCount;
       }
-  
-      for(let i=iPageStart; i<=iPageEnd; i++)
-      {
-        if (i==iCurrentPage)
-        {
-            html.push( <li className="active" ><a style={{cursor: "pointer"}} onClick={() => ClientSearchItem(i,pageSize,orderby)}>{i}</a></li>);
+
+      for (let i = iPageStart; i <= iPageEnd; i++) {
+        if (i == iCurrentPage) {
+          html.push(<li className="active" ><a style={{ cursor: "pointer" }} onClick={() => ClientSearchItem_Sort_Paging(i, pageSize, orderby)}>{i}</a></li>);
         }
-        else
-        {
-          html.push( <li ><a style={{cursor: "pointer"}} onClick={() => ClientSearchItem(i,pageSize,orderby)}>{i}</a></li>)
+        else {
+          html.push(<li ><a style={{ cursor: "pointer" }} onClick={() => ClientSearchItem_Sort_Paging(i, pageSize, orderby)}>{i}</a></li>)
         }
-        
+
       }
       return html;
     }
     return "";
-  
+
   }
 
-  
+
   return (
 
 
     <div>
-      {/* <BannerDetail MethodParent={MethodParent}></BannerDetail> */}
+      <BannerDetail ></BannerDetail>
 
-      <section>
+      {/* <section>
 
-      
 
-      <div>
-        <div id="ImageTopBanner" className="carousel slide" data-ride="carousel"> 
-          <img src={XemChiTiet} alt="" /> 
-          <div className="row col-md-12" id="searchBannerSubPage">  
-            <div className="container"> 
-              <div className="row">
-                <input type="text" id="txtKeyword" onChange={e => setKeywordQuickSearchGet(e.target.value)} 
-                //  onkeydown="javascript:if (event.keyCode == 13) {ClientSearchNews();}"
-                  className="form-control span12" placeholder="Từ khóa...." />  
-                <select className="form-control" id="cboCateChild"  onChange={e => {setCategoryBibGet( e.target.value)}} > 
-                  <option value="">CHỌN TIÊU CHÍ TÌM KIẾM</option> 
-                  <option value="title">Nhan đề</option> 
-                  <option value="author">Tác giả</option> 
-                  <option value="subject">Chủ đề</option> 
-                  <option value="keyword">Từ khóa</option> 
-                  <option value="yearpub">Năm xuất bản</option> 
-                </select> 
-                <a  onClick={()=>ClientQuickSearch(1,10,"ID",KeywordQuickSearchGet,CategoryBibGet )} id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>    
-              </div> 
-            </div> 
-          </div> 
+
+        <div>
+          <div id="ImageTopBanner" className="carousel slide" data-ride="carousel">
+            <img src={XemChiTiet} alt="" />
+            <div className="row col-md-12" id="searchBannerSubPage">
+              <div className="container">
+                <div className="row">
+                  <input type="text" id="txtKeyword" defaultValue={KeywordUrl} onChange={e => setKeywordQuickSearchGet(e.target.value)}
+                    //  onkeydown="javascript:if (event.keyCode == 13) {ClientSearchNews();}"
+                    onKeyDown={e => e.keyCode == 13 ? ClientQuickSearch(1, 10, "ID", KeywordQuickSearchGet, CategoryBibGet) : ''}
+                    className="form-control span12" placeholder="Từ khóa...." />
+                  <select className="form-control" id="cboCateChild"  value={CateSearchUrl}  onChange={e => { setCategoryBibGet(e.target.value) }} >
+                    <option value="">CHỌN TIÊU CHÍ TÌM KIẾM</option>
+                    <option value="title">Nhan đề</option>
+                    <option value="author">Tác giả</option>
+                    <option value="subject">Chủ đề</option>
+                    <option value="keyword">Từ khóa</option>
+                    <option value="yearpub">Năm xuất bản</option>
+                  </select>
+                  <a onClick={() => ClientQuickSearch(1, 10, "ID", KeywordQuickSearchGet, CategoryBibGet)} style={{ cursor: "pointer" }} id="btnSearchHome" className="form-control"><i className="fa fa-search" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section> */}
 
       <section>
         <div className="containernews">
@@ -424,36 +885,38 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                   <div className="panel-group" id="accordion"><div className="panel panel-default widget-sidebar">
                     <div className="panel-heading">
                       <h4 className="panel-title panel-title-adjust">
-                        <a  onClick={(e) => ShowHideRefindSeach('collapseTwoRSBibType')} data-toggle="collapse" aria-expanded="false"  >
+                        <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSBibType')} data-toggle="collapse" aria-expanded="false"  >
                           <i className="fa fa-plus-circle" /> Loại tài liệu
                         </a>
                       </h4>
                     </div>
                     <div id="collapseTwoRSBibType" className={collapseTwoRSBibType} >
-                            
+
                       <div id="divRSBibType" className="panel-body overflow-auto">
                         {
-                         state.items_BibType_Search?
-                          state.items_BibType_Search.Results ?
-                            state.items_BibType_Search.Results.map((item: any, index: number) => {
+                          state.items_BibType_Search ?
+                            state.items_BibType_Search.Results ?
+                              state.items_BibType_Search.Results.map((item: any, index: number) => {
 
-                              return (
-                                <>
+                                return (
+                                  <>
                                     <p>
-                                          <input type="checkbox"
-                                          // onclick="javascript:ClientSearchRefineQuickSearch();"
-                                          name="RSBibType" className="form-check-input" id="chkrs_rsbibtype_0" defaultValue="rsbibtype$Ảnh" />
-                                          <label className="form-check-label" htmlFor="chkrs_rsbibtype_0">{item.VALUE}</label>  
-                                          <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                                      <input type="checkbox"
+                                        //onClick={(e) => ShowHideRefindSeach('collapseTwoRSYear')}
+                                        onChange={e => ClientReloadDataByRefind('BibType', e.target)}
+                                        // onclick="javascript:ClientSearchRefineQuickSearch();"
+                                        name="RSBibType" className="form-check-input" id="chkrs_rsbibtype_0" defaultValue={item.VALUE} />
+                                      <label className="form-check-label" htmlFor="chkrs_rsbibtype_0">{item.VALUE}</label>
+                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
                                     </p>
-                                </>
-                              )
-                            })
+                                  </>
+                                )
+                              })
+                              : ""
                             : ""
-                            :  ""
-
+                          //DrawRefind('BiibType')
                         }
-                       
+
 
                       </div>
                     </div>
@@ -461,7 +924,7 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                     <div className="panel panel-default widget-sidebar">
                       <div className="panel-heading">
                         <h4 className="panel-title panel-title-adjust">
-                          <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSAuthor')}  data-toggle="collapse">
+                          <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSAuthor')} data-toggle="collapse">
                             <i className="fa fa-plus-circle" /> Tác giả
                           </a>
                         </h4>
@@ -469,35 +932,38 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                       <div id="collapseTwoRSAuthor" className={collapseTwoRSAuthor}>
                         <div id="divRSAuthor" className="panel-body overflow-auto">
 
-                        {
-                         state.items_Authors_Search?
-                          state.items_Authors_Search.Results ?
-                            state.items_Authors_Search.Results.map((item: any, index: number) => {
+                          {
+                            // state.items_Authors_Search ?
+                            //   state.items_Authors_Search.Results ?
+                            //     state.items_Authors_Search.Results.map((item: any, index: number) => {
 
-                              return (
-                                <>
-                                  
-                                    <p><input type="checkbox"
-                                      // onclick="javascript:ClientSearchRefineQuickSearch();"
-                                      name="RSAuthor" className="form-check-input" id="chkrs_rsauthor_0" defaultValue="rsauthor$Phạm Duy Quang Huy" />
-                                      <label className="form-check-label" htmlFor="chkrs_rsauthor_0">{item.VALUE}</label>  
-                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
-                                    </p>
+                            //       return (
+                            //         <>
 
-                                    
-                                </>
-                              )
-                            })
-                            : ""
-                            :""
+                            //           <p><input type="checkbox"
+                            //             // onclick="javascript:ClientSearchRefineQuickSearch();"
+                            //             onChange={e => ClientReloadDataByRefind('Author', e.target)}
+                            //             name="RSAuthor" className="form-check-input" id="chkrs_rsauthor_0" defaultValue={item.VALUE} />
+                            //             <label className="form-check-label" htmlFor="chkrs_rsauthor_0">{item.VALUE}</label>
+                            //             <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
+                            //           </p>
 
-                        }
-                        {
-                         state.items_Authors_Search?
-                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'author',state.items_Authors_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
 
-                          :""
-                        }
+                            //         </>
+                            //       )
+                            //     })
+                            //     : ""
+                            //   : ""
+                            DrawRefind('author')
+
+                          }
+                          {
+                            state.items_Authors_Search ?
+                              state.items_Authors_Search.LastRowOnPage <state.items_Authors_Search.RowCount?
+                              <p> <a style={{ cursor: "pointer" }} onClick={(e) => ShowMoreRefind(CateSearch, 'author', state.items_Authors_Search.LastRowOnPage + 10)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+                              : ""
+                              : ""
+                          }
 
                         </div>
                       </div>
@@ -505,42 +971,29 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                     <div className="panel panel-default widget-sidebar">
                       <div className="panel-heading">
                         <h4 className="panel-title panel-title-adjust">
-                          <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSYear')}  data-toggle="collapse">
+                          <a onClick={(e) => ShowHideRefindSeach('collapseTwoRSYear')} data-toggle="collapse">
                             <i className="fa fa-plus-circle" /> Năm xuất bản
                           </a>
                         </h4>
                       </div>
                       <div id="collapseTwoRSYear" className={collapseTwoRSPubyear}>
                         <div id="divRSYear" className="panel-body overflow-auto">
-                          
-                          
+
+
 
                           {
-                         state.items_Pubyear_Search?
-                          state.items_Pubyear_Search.Results ?
-                            state.items_Pubyear_Search.Results.map((item: any, index: number) => {
+                            DrawRefind('pubyear')
 
-                              return (
-                                <>
-                                    <p><input type="checkbox"
-                                      //  onclick="javascript:ClientSearchRefineQuickSearchYear();" 
-                                      name="RSYear" className="form-check-input" id="chkrs_rsyear_0" defaultValue="rsyear$25/11/2020" />
-                                      <label className="form-check-label" htmlFor="chkrs_rsyear_0">{item.VALUE}</label>  
-                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
-                                    </p>
-                                </>
-                              )
-                            })
-                            : ""
-                            :""
 
-                        }
-                        {
-                         state.items_Pubyear_Search?
-                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'pubyear',state.items_Pubyear_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
 
-                          :""
-                        }
+                          }
+                          {
+                            state.items_Pubyear_Search ?
+                            state.items_Pubyear_Search.LastRowOnPage <state.items_Pubyear_Search.RowCount?
+                              <p> <a style={{ cursor: "pointer" }} onClick={(e) => ShowMoreRefind(CateSearch, 'pubyear', state.items_Pubyear_Search.LastRowOnPage + 10)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+                              : ""
+                              : ""
+                          }
                         </div>
                       </div>
                     </div>
@@ -554,33 +1007,19 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                       </div>
                       <div id="collapseTwoRSKeyword" className={collapseTwoRSKeyword}>
                         <div id="divRSKeyword" className="panel-body overflow-auto">
-                          
+
                           {
-                         state.items_Keywords_Search?
-                          state.items_Keywords_Search.Results ?
-                            state.items_Keywords_Search.Results.map((item: any, index: number) => {
+                            DrawRefind('keyword')
 
-                              return (
-                                <>
-                                    <p><input type="checkbox"
-                                      // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                                      name="RSKeyword" className="form-check-input" id="chkrs_rskeyword_0" defaultValue="rskeyword$Lần thứ 38" />
-                                      <label className="form-check-label" htmlFor="chkrs_rskeyword_0">{item.VALUE}</label>  
-                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
-                                    </p>
-                                </>
-                              )
-                            })
-                            : ""
-                            :""
 
-                        }
-                        {
-                         state.items_Keywords_Search?
-                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'keyword',state.items_Keywords_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
-
-                          :""
-                        }
+                          }
+                          {
+                            state.items_Keywords_Search ?
+                            state.items_Keywords_Search.LastRowOnPage <state.items_Keywords_Search.RowCount?
+                              <p> <a style={{ cursor: "pointer" }} onClick={(e) => ShowMoreRefind(CateSearch, 'keyword', state.items_Keywords_Search.LastRowOnPage + 10)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+                              : ""
+                              : ""
+                          }
                         </div>
                       </div>
                     </div>
@@ -594,34 +1033,18 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                       </div>
                       <div id="collapseTwoRSSubject" className={collapseTwoRSSubject}>
                         <div id="divRSSubject" className="overflow-auto">
-                        {
-                         state.items_Subject_Search?
-                          state.items_Subject_Search.Results ?
-                            state.items_Subject_Search.Results.map((item: any, index: number) => {
+                          {
+                            DrawRefind('Subject')
 
-                              return (
-                                <>
-                                 
 
-                                    <p><input type="checkbox"
-                                      // onclick="javascript:ClientSearchRefineQuickSearch();" 
-                                      name="RSSubject" className="form-check-input" id="chkrs_rssubject_0" defaultValue="rssubject$Lần thứ 38" />
-                                      <label className="form-check-label" htmlFor="chkrs_rssubject_0">{item.VALUE}</label>  
-                                      <label className="form-check-label" htmlFor="exampleCheck1" style={{ float: 'right' }}>{item.CountGroupValue}</label>
-                                    </p>
-                                </>
-                              )
-                            })
-                            : ""
-                            :""
-
-                        }
-                        {
-                         state.items_Subject_Search?
-                            <p> <a  onClick={(e) => ShowMoreRefind(CateSearch,'Subject',state.items_Subject_Search.CurrentPage+1)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
-
-                          :""
-                        }
+                          }
+                          {
+                            state.items_Subject_Search ?
+                            state.items_Subject_Search.LastRowOnPage <state.items_Subject_Search.RowCount?
+                              <p> <a style={{ cursor: "pointer" }} onClick={(e) => ShowMoreRefind(CateSearch, 'Subject', state.items_Subject_Search.LastRowOnPage + 10)} >Xem thêm <i className="fa fa-angle-double-right"></i></a></p>
+                              : ""
+                              : ""
+                          }
                         </div>
                       </div>
                     </div>
@@ -739,7 +1162,7 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                               <div className="col-sm-5">
                                 <div className="form-submit  ">
                                   <button type="submit"
-                                    onClick={() => ClientSearchItem(1,10,"ID")}
+                                    onClick={() => ClientSearchItem(1, 10, "ID")}
                                     className="awe-btn btn-sm awe-search"><i className="fa fa-search" aria-hidden="true" /> Tìm kiếm</button>
                                 </div>
                               </div>
@@ -981,14 +1404,13 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                 <div className="col-sm-12">
                   <div id="divSearchUtility" style={{}}>
                     <div id="divSearchInfo" className="search-result alert alert-info" style={{ display: 'none' }}><div className="text-center"><i className="fa fa-spinner fa-spin" /></div></div>
-                   
 
                     <div id="divSearchUtility" style={{}}>
                       <div id="divSearchInfo" className="search-result alert alert-info" style={{}}><p>Tìm thấy <ins>{state.item.RowCount}</ins> <span>Kết quả</span></p></div>
                       <div id="divSearchFilter" className="sort-view clearfix" style={{}}>   <div>
                         {/* checkbox */}
                         <div className="radio-checkbox pull-left">
-                          <input type="checkbox" name="checkbox-all"
+                          <input type="checkbox"  onChange={e => ClientCheckAll(e.target)} name="checkbox-all"
                             //   onclick="javascript:ClientCheckAllBib();"
                             id="checkbox-all" className="checkbox" /><label htmlFor="checkbox-all" />
                         </div>
@@ -997,8 +1419,8 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                         <div className="sort-by">
                           <div className="pull-left"><span className="pull-left">Sắp xếp</span>
                             <select name="start" id="cbFilterField" className="form-control pull-left opacselect"
-                            // onchange="javascript:ClientFieldSortOnchange('cms', this);"
-                            onChange={e =>  ClientSearchItem_Sort(1, 10, e.target.value)}
+                              // onchange="javascript:ClientFieldSortOnchange('cms', this);"
+                              onChange={e => ClientSearchItem_Sort_Paging(1, 10, e.target.value)}
                             >
                               <option value="">--- Chọn ---</option>
                               <option selected value="newbib_dsc">Thích hợp</option>
@@ -1008,8 +1430,8 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                             </select>
                             <span className="pull-left">Hiển thị: </span>
                             <select name="start" style={{ width: '20%' }} id="cbRecordPage" className="form-control pull-left opacselect"
-                            // onchange="javascript:ClientRecordPageOnchange('cms', this);"
-                            onChange={e =>  ClientSearchItem_Sort(1, parseInt(e.target.value),"ID")}
+                              // onchange="javascript:ClientRecordPageOnchange('cms', this);"
+                              onChange={e => ClientSearchItem_Sort_Paging(1, parseInt(e.target.value), "ID")}
                             >
                               <option selected value={10}>10</option>
                               <option value={50}>50</option>
@@ -1018,18 +1440,18 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                             </select>
                           </div>
                           <div className="pull-right">
-                            
-                            <div id="divPagination" className="tool-bar"><ul className="pagination pagination-sm cusPagination">
-                              <li><a  onClick={() => ClientPageNextPrev(CurrentPage,"top")}> <i className="fa fa-angle-double-left" /></a></li>
-                              <li><a onClick={() => ClientPageNextPrev(CurrentPage,"pre")} ><i className="fa fa-angle-left" /></a></li>
-                              
-                              {RenderPaging(state.item.PageCount,state.item.CurrentPage)}
-                              
 
-                              <li><a onClick={() => ClientPageNextPrev(CurrentPage,"next")}><i className="fa fa-angle-right" /></a></li>
-                              <li><a onClick={() => ClientPageNextPrev(CurrentPage,"end")}><i className="fa fa-angle-double-right" /></a></li>
-                              </ul>
-                            </div>   <div id="divUtility" className="tool-bar navbar-right"><a href="javascript:ClientExportBib('cms', 'excel');" className="btn btn-default btn-sm" title="Chọn in ấn phẩm"><i className="fa fa-print" /></a>
+                            <div id="divPagination" className="tool-bar"><ul className="pagination pagination-sm cusPagination">
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "top")}> <i className="fa fa-angle-double-left" /></a></li>
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "pre")} ><i className="fa fa-angle-left" /></a></li>
+
+                              {RenderPaging(state.item.PageCount, state.item.CurrentPage)}
+
+
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "next")}><i className="fa fa-angle-right" /></a></li>
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "end")}><i className="fa fa-angle-double-right" /></a></li>
+                            </ul>
+                            </div>   <div id="divUtility" className="tool-bar navbar-right"><a style={{ cursor: "pointer" }} onClick={() => ClientExportBib()} className="btn btn-default btn-sm" title="Chọn in ấn phẩm"><i className="fa fa-print" /></a>
                             </div>
 
                           </div>
@@ -1040,9 +1462,6 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
 
                       {/* Chi tiết biểu ghi */}
                       <ul id="ulSearchResult" className="media-list result-list">
-
-
-                        {/* For ở đây */}
 
                         {
 
@@ -1055,14 +1474,16 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                                 <>
                                   {/* <div className="sssssssssssssslnhai123333">{item.ID}</div> */}
                                   <li className="media">
-                                    <div className="divDetailBibiSearch">
-                                      <div className="radio-checkbox pull-left"><input type="checkbox" className="checkbox"
+                                    <div className="divDetailBibiSearch" id ="divIDDetailBibiSearch">
+                                      <div className="radio-checkbox pull-left">
+                                        <input type="checkbox" id={'chk'+item.ID } value={item.ID} className="checkbox" onChange={e => ClientCheckBib(e.target)} 
+                                        // checked={CheckAll} 
                                         //    onclick="ClientBibCheckBox('143562');"
-                                        name="checkbox-bib" /> <label />  <span style={{ fontWeight: 900 }}>{index + 1}.</span>
+                                        name="checkbox-bib" /> <label htmlFor={'chk'+item.ID } />  <span style={{ fontWeight: 900 }}>{index + 1}.</span>
                                       </div>
                                       <div className="media-body">
                                         <h4 className="media-heading">
-                                          <a href="../cms/viewdetail-lanh-dao-dang-uy-khoi-doanh-nghiep-ha-noi-tham-du-hoi-nghi-cong-bo-quyet-dinh-chuyen-giao--tiep-nhan-dang-bo-tong-cong-ty-dien-luc-mien-bac-tu-truc-thuoc-dang-bo-khoi-doanh-nghiep-ha-noi-ve-truc-thuoc-dang-bo-tap-doan-dien-luc-viet-nam-(thuoc-dang-bo-khoi-doanh-nghiep-trung-uong)-id-143562.html" target="_blank">{item.TITLE}</a>
+                                          <a href={"../DetailBook/"+item.TITLES_UNS+'/'+item.ID} target="_blank">{item.TITLE}</a>
                                           <input type="hidden" id="hdBibId" defaultValue={143562} />
                                           <input type="hidden" id="hdDbBibTitle143562" defaultValue={item.TITLE} />
                                           <input type="hidden" id="hdDbSource" defaultValue="DLIB" />
@@ -1080,18 +1501,18 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                                             <div id="divBibDetail143562" className="media doc-details">
                                               <div id="divBibDetail143562" className="media doc-details">
                                                 <div className="media-left">
-                                                  <a href="#"><img alt="..." src="http://113.160.187.1:82/pages/opac/images/no-thumb/nothumb.jpg" className="media-object" /></a>
+                                                  <a href={"../DetailBook/"+item.TITLES_UNS+'/'+item.ID} ><img alt="..." src={ENV.URL_Nginx+item.COVER_PHOTO} className="media-object" /></a>
                                                 </div>
                                                 <div className="media-body">
                                                   <dl>
                                                     <dd> <dl >
                                                       <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Tác giả:</strong></dd>
-                                                      <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>{item.AUTHOR}
+                                                      <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}><a style={{ cursor: "pointer" }}  onClick={() => window.open('/SearchParam/'+item.AUTHOR+'/author')}  >{item.AUTHOR}</a>
                                                       </dd>
                                                     </dl> </dd>
                                                     <dd> <dl >
                                                       <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Năm xuất bản:</strong></dd>
-                                                      <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}>{item.YEAR_PUB}</dd>
+                                                      <dd style={{ width: '70%', float: 'left', whiteSpace: 'pre-line', display: 'inline' }}><a style={{ cursor: "pointer" }}  onClick={() => window.open('/SearchParam/'+item.YEAR_PUB+'/yearpub')}  >{item.YEAR_PUB}</a> </dd>
                                                     </dl> </dd>
                                                     <dd> <dl >
                                                       <dd style={{ width: '30%', float: 'left', whiteSpace: 'pre-line', display: 'inline-flex' }}><strong>Tóm tắt:</strong></dd>
@@ -1156,12 +1577,16 @@ const ClientSearchItem = (page: number , pageSize:number, orderby:string ) => {
                         {/* sort */}
                         <div className="sort-by">
                           <div className="pull-right">
-                            <div id="divPaginationBottom" className="tool-bar"><ul className="pagination pagination-sm cusPagination"><li><a href="javascript:ClientPagingOnChange('cms','','','unsigned$0$0$1$|title$Hội nghị $0$0$and||sortfield$newbib_dsc$0$1|', '5378','10','10','0','10','ClientPagingOnChange');"> <i className="fa fa-angle-double-left" /></a></li>
-                              <li><a href="javascript:ClientPagingOnChange('cms','','','unsigned$0$0$1$|title$Hội nghị $0$0$and||sortfield$newbib_dsc$0$1|','5378','10','10','0','10','ClientPagingOnChange');"><i className="fa fa-angle-left" /></a></li>
-                              
-                              {RenderPaging(state.item.PageCount,state.item.CurrentPage)}
-                              <li><a href="javascript:ClientPagingOnChange('cms','','','unsigned$0$0$1$|title$Hội nghị $0$0$and||sortfield$newbib_dsc$0$1|','5378','10','10','2','10','ClientPagingOnChange');"><i className="fa fa-angle-right" /></a></li><li><a href="javascript:ClientPagingOnChange('cms','','','unsigned$0$0$1$|title$Hội nghị $0$0$and||sortfield$newbib_dsc$0$1|','5378','10','10','537','10','ClientPagingOnChange');"><i className="fa fa-angle-double-right" /></a></li></ul></div>   <div id="divUtilityBottom" className="tool-bar navbar-right">
-                              <a href="javascript:ClientExportBib('cms', 'excel');" className="btn btn-default btn-sm" title="Chọn in ấn phẩm"><i className="fa fa-print" /></a>
+                            <div id="divPaginationBottom" className="tool-bar"><ul className="pagination pagination-sm cusPagination">
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "top")}> <i className="fa fa-angle-double-left" /></a></li>
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "pre")} ><i className="fa fa-angle-left" /></a></li>
+
+                              {RenderPaging(state.item.PageCount, state.item.CurrentPage)}
+
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "next")}><i className="fa fa-angle-right" /></a></li>
+                              <li><a style={{ cursor: "pointer" }} onClick={() => ClientPageNextPrev(CurrentPage, "end")}><i className="fa fa-angle-double-right" /></a></li>
+                            </ul></div>   <div id="divUtilityBottom" className="tool-bar navbar-right">
+                              <a  style={{ cursor: "pointer" }} onClick={() => ClientExportBib()} className="btn btn-default btn-sm" title="Chọn in ấn phẩm"><i className="fa fa-print" /></a>
                             </div>
                           </div>
                           <div className="clearfix" />

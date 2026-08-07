@@ -23,7 +23,7 @@ export const ActionCreators = {
         dispatch: React.Dispatch<KnownAction>,
         ModelSearch?: any
     ) => {
-        
+
         let response = await SearchService.SearchService.QuickSearch(ModelSearch);
         if (response != null) {
 
@@ -41,7 +41,7 @@ export const ActionCreators = {
 
         let response = await SearchService.SearchService.BasicSearch(ModelSearch);
         if (response != null) {
-            console.log("response.data",response.data);
+            console.log("response.data", response.data);
             dispatch({
                 type: ActionType.BasicSearch,
                 items: response.data
@@ -49,6 +49,38 @@ export const ActionCreators = {
         }
 
     },
+
+    ReportQuickSearch: async (
+        dispatch: React.Dispatch<KnownAction>,
+        ModelSearch?: any
+    ) => {
+
+        let response = await SearchService.SearchService.ReportQuickSearch(ModelSearch);
+        if (response != null) {
+
+            dispatch({
+                type: ActionType.ReportQuickSearch,
+                items: response.data
+            });
+        }
+
+    },
+    ReportBasicSearch: async (
+        dispatch: React.Dispatch<KnownAction>,
+        ModelSearch?: any
+    ) => {
+
+        let response = await SearchService.SearchService.ReportBasicSearch(ModelSearch);
+        if (response != null) {
+            console.log("response.data", response.data);
+            dispatch({
+                type: ActionType.ReportBasicSearch,
+                items: response.data
+            });
+        }
+
+    },
+
     BasicSearch_Refind_BibType: async (
         dispatch: React.Dispatch<KnownAction>,
         ModelSearch?: any
@@ -56,7 +88,7 @@ export const ActionCreators = {
 
         let response = await OBibTypesService.OBibTypesService.O_BIBTYPES_BasicSearch(ModelSearch);
         if (response != null) {
-           
+
             dispatch({
                 type: ActionType.BibTypesQuickSearch,
                 items: response.data
@@ -71,7 +103,7 @@ export const ActionCreators = {
 
         let response = await OBibTypesService.OBibTypesService.O_BIBTYPES_QuickSearch(ModelSearch);
         if (response != null) {
-            console.log("response.data3333",response.data);
+            console.log("response.data3333", response.data);
             dispatch({
                 type: ActionType.BibTypesBasicSearch,
                 items: response.data
@@ -86,7 +118,7 @@ export const ActionCreators = {
 
         let response = await OBibTypesService.OAuthorsService.O_AUTHORS_BasicSearch(ModelSearch);
         if (response != null) {
-            console.log("responsedataAuthorBasicSearch",response.data);
+            console.log("responsedataAuthorBasicSearch", response.data);
             dispatch({
                 type: ActionType.AuthorsQuickSearch,
                 items: response.data
@@ -101,7 +133,7 @@ export const ActionCreators = {
 
         let response = await OBibTypesService.OAuthorsService.O_AUTHORS_QuickSearch(ModelSearch);
         if (response != null) {
-            console.log("responsedataAuthorQuickSearch",response.data);
+            console.log("responsedataAuthorQuickSearch", response.data);
             dispatch({
                 type: ActionType.AuthorsBasicSearch,
                 items: response.data
@@ -116,7 +148,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OKeywordsService.O_KEYWORDS_BasicSearch(ModelSearch);
         if (response != null) {
-            
+
             dispatch({
                 type: ActionType.KeywordsQuickSearch,
                 items: response.data
@@ -131,7 +163,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OKeywordsService.O_KEYWORDS_QuickSearch(ModelSearch);
         if (response != null) {
-            console.log("response.data3333",response.data);
+            console.log("response.data3333", response.data);
             dispatch({
                 type: ActionType.KeywordsBasicSearch,
                 items: response.data
@@ -146,7 +178,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OPubyearService.O_PUBYEAR_BasicSearch(ModelSearch);
         if (response != null) {
-           
+
             dispatch({
                 type: ActionType.PubyearQuickSearch,
                 items: response.data
@@ -161,7 +193,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OPubyearService.O_PUBYEAR_QuickSearch(ModelSearch);
         if (response != null) {
-            console.log("response.data3333",response.data);
+            console.log("response.data3333", response.data);
             dispatch({
                 type: ActionType.PubyearBasicSearch,
                 items: response.data
@@ -176,7 +208,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OSubjectService.O_SUBJECT_BasicSearch(ModelSearch);
         if (response != null) {
-           
+
             dispatch({
                 type: ActionType.SubjectQuickSearch,
                 items: response.data
@@ -191,7 +223,7 @@ export const ActionCreators = {
 
         let response = await SearchService.OSubjectService.O_SUBJECT_QuickSearch(ModelSearch);
         if (response != null) {
-            console.log("response.data3333",response.data);
+            console.log("response.data3333", response.data);
             dispatch({
                 type: ActionType.SubjectBasicSearch,
                 items: response.data
@@ -202,9 +234,9 @@ export const ActionCreators = {
 
 }
 
-export const reducer = (state:any, doctypeAction: KnownAction) => {
+export const reducer = (state: any, doctypeAction: KnownAction) => {
     let action;
-    
+
     switch (doctypeAction.type) {
 
         case ActionType.QuickSearch:
@@ -215,82 +247,110 @@ export const reducer = (state:any, doctypeAction: KnownAction) => {
             };
         case ActionType.BasicSearch:
             action = doctypeAction as ReceivedItemAction
-            
+
             return {
                 ...state,
                 item: action.items
             };
+        case ActionType.ReportQuickSearch:
+            action = doctypeAction as ReceivedItemAction
+            return {
+                ...state,
+                itemReport: action.items
+            };
+        case ActionType.ReportBasicSearch:
+            action = doctypeAction as ReceivedItemAction
+
+            return {
+                ...state,
+                itemReport: action.items
+            };
+
+
+        // case ActionType.RefindQuickSearch:
+        //         action = doctypeAction as ReceivedItemAction
+        //         return {
+        //             ...state,
+        //             item: action.items
+        //         };
+        // case ActionType.RefindBasicSearch:
+        //         action = doctypeAction as ReceivedItemAction
+        //         return {
+        //             ...state,
+        //             item: action.items
+        //         };
+
         case ActionType.BibTypesBasicSearch:
-                action = doctypeAction as ReceivedItemAction
-                
+            action = doctypeAction as ReceivedItemAction
+
             return {
                 ...state,
                 items_BibType_Search: action.items
-            }; 
+            };
         case ActionType.BibTypesQuickSearch:
-                    action = doctypeAction as ReceivedItemAction
-                    console.log("response.data11111",action.items);
+            action = doctypeAction as ReceivedItemAction
+            console.log("response.data11111", action.items);
             return {
                 ...state,
                 items_BibType_Search: action.items
-            }; 
+            };
         case ActionType.AuthorsBasicSearch:
-                action = doctypeAction as ReceivedItemAction
-                
+            action = doctypeAction as ReceivedItemAction
+
             return {
                 ...state,
                 items_Authors_Search: action.items
-            }; 
+            };
         case ActionType.AuthorsQuickSearch:
-                    action = doctypeAction as ReceivedItemAction
-                    console.log("response.data11111",action.items);
+            action = doctypeAction as ReceivedItemAction
+            console.log("response.data11111", action.items);
             return {
                 ...state,
                 items_Authors_Search: action.items
-            };    
-            
+            };
+
         case ActionType.KeywordsBasicSearch:
-                action = doctypeAction as ReceivedItemAction
-                
+            action = doctypeAction as ReceivedItemAction
+
             return {
                 ...state,
                 items_Keywords_Search: action.items
-            }; 
+            };
         case ActionType.KeywordsQuickSearch:
-                    action = doctypeAction as ReceivedItemAction
-                    console.log("response.data11111",action.items);
+            action = doctypeAction as ReceivedItemAction
+            console.log("response.data11111", action.items);
             return {
                 ...state,
                 items_Keywords_Search: action.items
-            }; 
+            };
         case ActionType.PubyearBasicSearch:
-                action = doctypeAction as ReceivedItemAction
-                
+            action = doctypeAction as ReceivedItemAction
+
             return {
                 ...state,
                 items_Pubyear_Search: action.items
-            }; 
+            };
         case ActionType.PubyearQuickSearch:
-                    action = doctypeAction as ReceivedItemAction
-                    console.log("response.data11111",action.items);
+            action = doctypeAction as ReceivedItemAction
+            console.log("response.data11111", action.items);
             return {
                 ...state,
                 items_Pubyear_Search: action.items
             };
         case ActionType.SubjectBasicSearch:
-                action = doctypeAction as ReceivedItemAction
-                
+            action = doctypeAction as ReceivedItemAction
+
             return {
                 ...state,
                 items_Subject_Search: action.items
-            }; 
+            };
         case ActionType.SubjectQuickSearch:
-                    action = doctypeAction as ReceivedItemAction
-                    console.log("response.data11111",action.items);
+            action = doctypeAction as ReceivedItemAction
+            console.log("response.data11111", action.items);
             return {
                 ...state,
                 items_Subject_Search: action.items
-            }; 
+            };
     }
 }
 

@@ -1,40 +1,41 @@
+import ENV from "services";
 import { HttpClient } from "utils";
 
 const UMSService = {
     signIn: async(signInRequestModel: any) => {
-        return await HttpClient.post(`ums/Auth/SignIn`, signInRequestModel)
+        return await HttpClient.post(ENV.PREFIX_CMS+'/'+`CMS_USERS/Login`, signInRequestModel)
             .then(res => {return res})
     },
     signOut: async() => {
-        return await HttpClient.post(`ums/Auth/SignOut`,{})
+        return await HttpClient.post(ENV.PREFIX_CMS+'/'+`ums/Auth/SignOut`,{})
             .then(res => {return res})
     },
     getUsers: async (page: number, pageSize: number, name?: string) => {
-        return await HttpClient.get(`ums/User?page=${page}&pageSize=${pageSize}&name=${name??""}`)
+        return await HttpClient.get(ENV.PREFIX_CMS+'/'+`ums/User?page=${page}&pageSize=${pageSize}&name=${name??""}`)
             .then(res => {return res})
     },
     getUser: async (userId: string) => {
-        return await HttpClient.get(`ums/User?userId=${userId}`)
+        return await HttpClient.get(ENV.PREFIX_CMS+'/'+`ums/User?userId=${userId}`)
             .then(res => {return res})
     },
     getUserDetail: async (userId: string) => {
-        return await HttpClient.get(`ums/User/detail/${userId}`)
+        return await HttpClient.get(ENV.PREFIX_CMS+'/'+`ums/User/detail/${userId}`)
             .then(res => {return res})
     },
     getByName: async (userName: string) => {
-        return await HttpClient.get(`ums/User?userName=${userName}`)
+        return await HttpClient.get(ENV.PREFIX_CMS+'/'+`ums/User?userName=${userName}`)
             .then(res => {return res})
     },
     getDetailByName: async (userName: string) => {
-        return await HttpClient.get(`ums/User?userName=${userName}`)
+        return await HttpClient.get(ENV.PREFIX_CMS+'/'+`ums/User?userName=${userName}`)
             .then(res => {return res})
     },
     deleteUser: async (userId: string) => {
-        return await HttpClient.delete(`ums/User?userId=${userId}`)
+        return await HttpClient.delete(ENV.PREFIX_CMS+'/'+`ums/User?userId=${userId}`)
             .then(res => {return res})
     },
     createUser: async (user: any) => {
-        return await HttpClient.post(`ums/User`, user)
+        return await HttpClient.post(ENV.PREFIX_CMS+'/'+`ums/User`, user)
             .then(res => {return res})
     },
 }
